@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.3"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
+    
+   
+    <!-- Default structure of a rule 
+        <navigation-rule>
+            <description></description
+            <from-view-id></from-view-id>
+            <navigation-case>
+                <from-action></from-action>
+                <from-outcome></from-outcome>
+                <if></if>
+                <to-view-id></to-view-id>
+            </navigation-case>
+        </navigation-rule>
+    -->
+    
+    <navigation-rule>
+        <description>Create user page</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>create-user</from-outcome>
+            <to-view-id>/create-user.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <description>Create group page</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>create-group</from-outcome>
+            <to-view-id>/admin/create-group.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <description>List users page</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>list-users</from-outcome>
+            <to-view-id>/admin/list-users.xhtml</to-view-id>
+            <redirect/>  
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <description>Logout page</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/goodbye.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <description>User creation action result</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{createUser.create()}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/admin/list-users.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{createUser.create()}</from-action>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/create-user.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <description>Group creation action result</description>
+        <from-view-id>create-group.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{createGroup.create()}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/admin/list-users.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{createGroup.create()}</from-action>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>#{view.viewId}</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+</faces-config>

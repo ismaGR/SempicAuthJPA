@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/SempicJPA" preemptiveAuthentication="true">
+  <!-- AUthentification config for TomEE, to be commented with Gassfish -->
+  <Valve className="org.apache.catalina.authenticator.FormAuthenticator"/>
+  <Realm cdi="true" className="org.apache.tomee.catalina.realm.LazyRealm" realmClass="fr.uga.miashs.sempic.backingbeans.SessionTools"/>
+</Context>
