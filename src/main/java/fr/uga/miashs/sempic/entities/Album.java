@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
@@ -47,10 +48,10 @@ public class Album implements Serializable{
     private SempicUser owner;
 
     @NotBlank
-    private String title;
+    private String title="title";
     
-    /*@OneToMany(mappedBy="album")
-    private Set<Photo> photos;*/
+    @OneToMany(mappedBy="album")
+    private Set<Photo> photos;
 
     public Album() {}
     
@@ -77,9 +78,9 @@ public class Album implements Serializable{
         this.title = title;
     }
 
-    /*public Set<Photo> getPhotos() {
+    public Set<Photo> getPhotos() {
         return photos;
-    }*/
+    }
 
     @Override
     public int hashCode() {

@@ -3,7 +3,7 @@
   <persistence-unit name="SempicPU" transaction-type="JTA">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <!--provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider-->
-    <jta-data-source>java:app/sempicdb</jta-data-source>
+    <jta-data-source>java:app/SempicDB</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!-- for glassfish only -->

@@ -15,6 +15,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.Principal;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,8 @@ import javax.persistence.NoResultException;
 import javax.security.enterprise.SecurityContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+
 
 /**
  *
@@ -46,8 +49,12 @@ public class SessionTools implements Serializable {
     @Inject
     private SempicUserFacade userDao;
     
-
+    @Inject
+    private AlbumFacade albumDao;
+    
     private SempicUser connectedUser;
+    private Album currentAlbum;
+    private List<Album> userAlbums;
     
     private String currentView;
     private String previousView;
@@ -144,7 +151,58 @@ public class SessionTools implements Serializable {
             throw new SempicException("parameter userId is not a number: "+userId,e);
         }
     }
-    
+
+    @Produces
+    @Selected
+    @Dependent
+    @Named
+    public Album getSelectedAlbum() throws SempicException {
+        String albumId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("albumId");
+        try {            
+            SempicUser sempicUser = getConnectedUser();          
+            if (albumId != null) {
+                long id = Long.parseLong(albumId);
+                Album album = albumDao.read(id);
+                if((album != null && album.getAlbumId() > 0) && 
+                (currentAlbum.getOwner().getId() == sempicUser.getId()) 
+                || sempicUser.getUserType() == SempicUserType.ADMIN){
+                    currentAlbum = albumDao.read(id);
+                    return currentAlbum;
+                }                  
+            }
+        } catch (NumberFormatException e) {
+            throw new SempicException("parameter albumId is not a number: "+albumId,e);
+        }
+        return null;
+    }
+
+
+    @Produces
+    @Selected
+    @Dependent
+    @Named
+    public List<Album> getUserAlbums() throws SempicException {
+        try {            
+            SempicUser sempicUser = getConnectedUser(); 
+            this.userAlbums = albumDao.findAlbumsOf(sempicUser);
+            return this.userAlbums;
+        } catch (Exception e) {
+            throw new SempicException("getUserAlbums: "+e.getMessage());
+        }
+    }
+
+    public Album setCurrentAlbum(Album album){
+        SempicUser sempicUser = getConnectedUser(); 
+        if(album != null && album.getAlbumId() > 0 &&
+        ((currentAlbum != null || (currentAlbum.getOwner().getId() == sempicUser.getId())) 
+        || sempicUser.getUserType() == SempicUserType.ADMIN))        
+        {
+            this.currentAlbum = album; 
+        }        
+        return null; 
+    }
+
+
     public boolean isNotLogged() {
         return (getConnectedUser()==null);
     }

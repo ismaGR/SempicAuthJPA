@@ -5,9 +5,9 @@
  */
 package fr.uga.miashs.sempic.backingbeans;
 
+import fr.uga.miashs.sempic.dao.AlbumFacade;
 import fr.uga.miashs.sempic.dao.PhotoFacade;
 import java.io.Serializable;
-
 
 import fr.uga.miashs.sempic.SempicModelException;
 import fr.uga.miashs.sempic.entities.Album;
@@ -18,36 +18,70 @@ import fr.uga.miashs.sempic.entities.SempicUser;
 import fr.uga.miashs.sempic.qualifiers.Selected;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import javax.servlet.http.Part;
+
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
-
+import javax.xml.bind.DatatypeConverter;
 /**
  *
  * @author inhoa
  */
 @Named
 @ViewScoped
+//@SessionScoped
 public class CreatePhoto implements Serializable {
     
-    /*@Inject
-    @Selected*/
-    private Album selectedAlbum;
-    
-    
-    private List<Part> files;
+    @Inject
+    @Selected
+    private Album currentAlbum;    
 
     
+    @Inject
+    private AlbumFacade albumDao;
+
+    @Inject
+    @Selected
+    private SempicUser selectedUser;
+
+    private Photo current;
+
+
+
+    private List<Part> files;
+
+    private Part file;
+          
+    private static final Map <String, String> mimeTypes; // static - one obj for all
     
+    static {
+        Map <String, String> aMap = new HashMap <String, String>();
+        aMap.put("image/png", "png");
+        aMap.put("image/jpeg", "jpeg");
+        mimeTypes = Collections.unmodifiableMap(aMap);
+    }    
+
     @Inject
     private PhotoFacade service;
     
@@ -57,6 +91,8 @@ public class CreatePhoto implements Serializable {
     
     @PostConstruct
     public void init() {
+        this.current = new Photo();
+        this.current.setAlbum(currentAlbum);
     }
 
 
@@ -69,18 +105,67 @@ public class CreatePhoto implements Serializable {
         this.files = files;
         //current.setFilename("");//file.getName());
     }
-    
+
+
+    public Part getFile(){
+        return file;
+    }
+    public void setFile(Part f){
+        this.file = f;
+    }    
+    private String createSha1(InputStream fis) throws IOException  {
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA-1");
+             int n = 0;
+            byte[] buffer = new byte[8192];
+            while (n != -1) {
+                n = fis.read(buffer);
+                if (n > 0) {
+                    digest.update(buffer, 0, n);
+                }
+            }
+            return  DatatypeConverter.printHexBinary(digest.digest());
+
+        } catch (NoSuchAlgorithmException ex) {
+            //  System.out.println(ex.getMessage());
+        } 
+        return null;
+    }    
+    public void save() throws Exception {
+        try  {
+            InputStream input = file.getInputStream();
+            String mime = file.getContentType();
+            
+            if (mimeTypes.containsKey(mime)){
+                
+                String fileName = createSha1(input) + "." + mimeTypes.get(mime);
+                input = file.getInputStream(); // mark(0) doesnt work, so we initialize again
+            //  String fileName = "test.jpeg";
+                System.out.println(fileName);
+                //throw new Exception("OK "+fileName);
+            } 
+            
+        }
+        catch (IOException e) {
+            throw new Exception("img upload KO "+e.getMessage());
+        }
+    }    
     public String create() {
-        if (selectedAlbum==null) {
+        if (currentAlbum==null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("parameter albumId must be given"));
             return "failure";
         }
+        Logger.getLogger(Album.class.getName()).log(Level.INFO, null, currentAlbum);
         boolean partiallyFailed=false;
-        for (Part p : files) {
-            Photo current=new Photo();
-            current.setAlbum(selectedAlbum);
+       
+
+            Logger.getLogger(Album.class.getName()).log(Level.INFO, null, file);
+            current=new Photo();
+            current.setAlbum(currentAlbum);
+
             try {
-                service.create(current,p.getInputStream());
+                service.create(current,file.getInputStream());
             } catch (SempicModelException ex) {
                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
                partiallyFailed=true; 
@@ -90,7 +175,7 @@ public class CreatePhoto implements Serializable {
                  partiallyFailed=true;
                 
             }
-        }
+        
         if (partiallyFailed) {
              return "failure";
         }

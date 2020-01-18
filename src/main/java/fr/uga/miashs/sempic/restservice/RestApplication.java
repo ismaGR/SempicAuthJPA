@@ -30,15 +30,14 @@ public class RestApplication extends Application{
     
     public Set<Class<?>> getClasses(){
         Set res = new HashSet();
-        String[] features = { "org.glassfish.jersey.moxy.json.MoxyJsonFeature",
-    };
+        String[] features = { "org.eclipse.persistence.jaxb.rs.MOXyJsonProvider"};
         for (String fName : features){
             try{
                 Class cls = Class.forName(fName);
                 res.add(cls);
                 
             }catch (ClassNotFoundException ex){
-                Logger.getLogger(RestApplication.class.getName()).log(Level.WARNING,fName+"not available");
+                Logger.getLogger(RestApplication.class.getName()).log(Level.WARNING,fName+" not available");
             }
         }
         res.add(MOXyJsonProvider.class);

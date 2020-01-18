@@ -2,23 +2,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-    <f:metadata>
-        <f:viewAction  action="home"/>
-    </f:metadata>
+      xmlns:h5="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Welcome page</title>
+        <title>Création d'un Album</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>                
     </h:head>
     <h:body>
-        <p>Welcome to sempic application</p>
-        
-        <p>Avalaible actions:</p>
-        <ul>
-            <li><h:button outcome="create-user" value="Create a user"/></li>
-            <li><h:button outcome="list-users" value="List of users"/></li>
-        </ul>
+
+
+        <h:form>
+            <h:panelGrid columns = "3">
+                <label for="title">Title:</label>
+                <h:inputText id="title" h5:placeholder="title" value="#{createAlbum.current.title}"/>
+                <h:message for="title"/>
+                <h:commandButton value="Créer" action="#{createAlbum.create()}"/>
+            </h:panelGrid>
+            <h:messages globalOnly="true"/>
+
+        </h:form>
     </h:body>
 </html>
 

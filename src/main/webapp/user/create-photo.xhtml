@@ -7,18 +7,37 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Création d'un album</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>                
     </h:head>
     <h:body>
-        <h:form>
+        <h:form method="POST"  enctype="multipart/form-data">
             <h:panelGrid columns="3">
                 <label for="file">Fichier:</label>
-                <h:inputFile id="file" h5:placeholder="My Photo File" value="#{createPhoto}"/>
+                <h:inputFile id="file" h5:placeholder="My Photo File" value="#{createPhoto.file}"/>
                 <h:message for="title"/>
             </h:panelGrid>
-            <h:commandButton value="Créer" action="{#createAlbum.create()}"/>
+            <h:selectManyCheckbox id="albumId" layout="pageDirection" value="#{createUser.selectedUser.albums}" var="album">
+                <f:selectItems value="#{album.albumId}"  itemLabel="#{album.title}"/>
+            </h:selectManyCheckbox>
+
+            <h:commandButton value="Créer" action="#{createPhoto.create()}"/>
             <h:messages globalOnly="true"/>
+
         </h:form>
-        
+
+
+
+        <h:dataTable class="table table-dark" id="photos" value="#{listPhotos.dataModel}" var="photo">
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Lastname" />
+                </f:facet>
+
+                <h:outputText value="#{photo}"/>
+            </h:column>
+
+        </h:dataTable>        
     </h:body>
 </html>
 

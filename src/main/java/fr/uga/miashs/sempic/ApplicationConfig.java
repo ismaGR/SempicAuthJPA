@@ -29,10 +29,11 @@ import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 @DataSourceDefinition(
         name = ApplicationConfig.DATA_SOURCE,
         // HSQL
-        className = "org.hsqldb.jdbcDriver",
+        className = "org.hsqldb.jdbc.JDBCDriver",
         //url="jdbc:hsqldb:mem:hsqldb", // memory database that is deleted when the server is stopped
         url = "jdbc:hsqldb:file:sempicdb",
-        databaseName = "SempicDB",
+        //url = "jdbc:hsqldb:hsql://172.17.0.2:9001/sempicdb",
+        databaseName = "sempicdb",
         user = "sempic",
         password = "sempic"
 )
@@ -67,7 +68,7 @@ Works only for glassfish (ie JavaEE8 fully compliant server), for tomm use web.x
 public class ApplicationConfig {
 
 
-    public final static String DATA_SOURCE = "java:app/sempicdb";
+    public final static String DATA_SOURCE = "java:app/SempicDB";
     public final static String WEB_API = "/webapi";
 
     @Inject
@@ -86,7 +87,6 @@ public class ApplicationConfig {
         admin.setEmail("admin@miashs.fr");
         admin.setUserType(SempicUserType.ADMIN);
         admin.setPasswordHash(passwordHash.generate("admin".toCharArray()));
-
         SempicGroup g = new SempicGroup();
         g.setName("admins");
         g.setOwner(admin);
