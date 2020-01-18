@@ -1,0 +1,15 @@
+###DOCKER
+docker-machine stop && docker-machine start && sleep 10 && docker-machine env && sleep 4  && eval $(docker-machine env)
+
+docker run -d -v $( echo $PWD ):/home/SempicAuthJPA  -p8888:8080 -p9001:9001 deb_buster
+
+[[ $(pgrep java) > 1 ]]&& kill $(pgrep java) && cd /home/SempicAuthJPA/ && rm -rf ./target && mvn package tomee:exec && ./target/apache-tomee/bin/startup.sh && sleep 4 && ./target/apache-tomee/bin/startup.sh && sleep 4 && tail -f  ./target/apache-tomee/logs/catalina.2020*.log
+
+###WIN
+ps aux
+#kill java
+rm -rf ./target && mvn package tomee:exec && sleep 4 && tail -f ./target/apache-tomee/logs/catalina*log 
+
+
+
+

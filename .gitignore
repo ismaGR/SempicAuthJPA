@@ -1,1 +1,10 @@
 target/
+.settings
+.vscode
+exemple
+sempicdb.tmp
+.classpath
+sempicdb.*
+.DS_Store
+.project
+
