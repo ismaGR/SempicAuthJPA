@@ -30,7 +30,7 @@ import javax.security.enterprise.SecurityContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
+ 
 
 /**
  *
@@ -151,11 +151,18 @@ public class SessionTools implements Serializable {
         }
     }
 
+    /**
+     * @param currentAlbum the currentAlbum to set
+     */
+    public void setCurrentAlbum(Album currentAlbum) {
+        this.currentAlbum = currentAlbum;
+    }
+
     @Produces
     @Selected
     @Dependent
     @Named
-    public Album getSelectedAlbum() throws SempicException {
+    public Album getCurrentAlbum() throws SempicException {
         String albumId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("albumId");
         try {            
             SempicUser sempicUser = getConnectedUser();          
@@ -168,6 +175,9 @@ public class SessionTools implements Serializable {
                     currentAlbum = albumDao.read(id);
                     return currentAlbum;
                 }                  
+            }
+            else{
+                this.currentAlbum = new Album();
             }
         } catch (NumberFormatException e) {
             throw new SempicException("parameter albumId is not a number: "+albumId,e);
@@ -193,15 +203,21 @@ public class SessionTools implements Serializable {
     public void setUserAlbums(List<Album>  albums){
         this.userAlbums = albums;
     }
-    public Album setCurrentAlbum(Album album){  
+    public void selectAlbum(){  
+        Album album = this.currentAlbum;
+        Logger.getLogger(SessionTools.class.getName()).log(Level.INFO, null, "setCurrentAlbum"+album.toString());
         SempicUser sempicUser = getConnectedUser(); 
         if(album != null && album.getAlbumId() > 0 &&
         ((currentAlbum != null || (currentAlbum.getOwner().getId() == sempicUser.getId())) 
         || sempicUser.getUserType() == SempicUserType.ADMIN))        
         {
             this.currentAlbum = album; 
-        }        
-        return null; 
+        }    
+        else
+        {
+            this.currentAlbum = new Album();
+        }    
+        Logger.getLogger(SessionTools.class.getName()).log(Level.INFO, null, "selectAlbum"+currentAlbum.toString());
     }
 
 

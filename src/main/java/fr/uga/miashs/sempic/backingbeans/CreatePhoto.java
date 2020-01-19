@@ -11,7 +11,6 @@ import java.io.Serializable;
 
 import fr.uga.miashs.sempic.SempicModelException;
 import fr.uga.miashs.sempic.entities.Album;
-import fr.uga.miashs.sempic.entities.Album;
 import fr.uga.miashs.sempic.entities.Photo;
 
 import fr.uga.miashs.sempic.entities.SempicUser;
@@ -50,14 +49,23 @@ import javax.xml.bind.DatatypeConverter;
  */
 @Named
 @ViewScoped
-//@SessionScoped
 public class CreatePhoto implements Serializable {
     
     @Inject
     @Selected
     private Album currentAlbum;    
 
-    
+    private Album album;
+
+    public Album getAlbum(){
+        return this.album;
+    }
+    /*
+     * @param album the album to set
+     */
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
     @Inject
     private AlbumFacade albumDao;
 
@@ -165,17 +173,31 @@ public class CreatePhoto implements Serializable {
         }
     }    
     public String create() {
-        if (currentAlbum==null) {
+        Album album = currentAlbum;
+        SessionTools st =new SessionTools();
+        Logger.getLogger(Album.class.getName()).log(Level.INFO, null, "CURRENT ALBUM SESSION TOOLS "+st);
+        Logger.getLogger(Album.class.getName()).log(Level.INFO, null, "CURRENT ALBUM SESSION TOOLS "+st.getConnectedUser());
+
+        Logger.getLogger(Album.class.getName()).log(Level.INFO, null, "CURRENT ALBUM SESSION TOOLS "+st);
+        Long albumId = album.getAlbumId();     
+        Logger.getLogger(Album.class.getName()).log(Level.INFO, null, "CURRENT ALBUM ID "+albumId);
+        if (albumId != null) {
+            Long id = albumId;
+            album = albumDao.read(id);
+            Logger.getLogger(Album.class.getName()).log(Level.INFO, null, "CURRENT ALBUM LOADED OK  "+album);
+        }          
+
+        if (album==null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("parameter albumId must be given"));
             return "failure";
         }
-        Logger.getLogger(Album.class.getName()).log(Level.INFO, null, currentAlbum);
+        Logger.getLogger(Album.class.getName()).log(Level.INFO, null, album);
         boolean partiallyFailed=false;
        
 
             Logger.getLogger(Album.class.getName()).log(Level.INFO, null, file);
             current=new Photo();
-            current.setAlbum(currentAlbum);
+            current.setAlbum(album);
 
             try {
                 service.create(current,file.getInputStream());
