@@ -22,12 +22,24 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Jerome David <jerome.david@univ-grenoble-alpes.fr>
  */
+//@XmlRootElement
+//@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 @Entity
+@NamedQueries({
+@NamedQuery(
+        name = "findGroupOf",
+        query = "SELECT DISTINCT g FROM SempicGroup g WHERE g.owner=:owner"
+)
+//,
+//    
+//@NamedQuery(
+//        name = "findAllAlbums",
+//        query = "SELECT DISTINCT a FROM Album a WHERE a.owner=:owner"
+//)
+})
 @Table(uniqueConstraints = {
     @UniqueConstraint(name = "UniqueGroupName", columnNames = {"name"})
 })
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class SempicGroup implements Serializable {
 
     @Id

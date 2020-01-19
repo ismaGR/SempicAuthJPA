@@ -1,9 +1,11 @@
+package fr.uga.miashs.sempic.restservice;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.uga.miashs.sempic.restservices;
+
 
 import static fr.uga.miashs.sempic.ApplicationConfig.WEB_API;
 import fr.uga.miashs.sempic.SempicException;

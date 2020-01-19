@@ -7,25 +7,50 @@
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Album <h:outputText value="#{viewAlbum.current.title}"/></title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>                
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>                
     </h:head>
     <h:body>
         
-        <h1>Album <h:outputText value="#{viewAlbum.current.title}"/></h1>
+        <h1>Albums pour l'utilisateur <h:outputText value="#{sessionTools.connectedUser.lastname}"/> </h1>
         
-        <h:form id="addPhoto" enctype="multipart/form-data">
-            <ui:repeat id="listPhotos" value="#{viewAlbum.photos}" var="photo">
-                <a href="#{application.contextPath}/webapi/picture/#{photo.path}" type="text/html">
-                    <h:graphicImage value="/webapi/picture/#{photo.path}?width=200"/>
-                </a>
-            </ui:repeat>
-            <p>
-                <h:inputFile p:multiple="multiple" id="photoUpload" p:type="file"  value="#{viewAlbum.createPhoto.file}" p:accept="image/*">
-                    <f:ajax listener="#{viewAlbum.createPhoto.create()}" render="@form"/> 
-                </h:inputFile>
-                <h:message for="photoUpload" />
-            </p>
-            <h:link value="create album"  outcome="create-album"/>
+        <h:dataTable class="table table-dark" id="groups" value="#{sessionTools.getUserAlbums()}" var="album"> 
+            
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="title" />
+                </f:facet>
+
+                <h:outputText value="#{album.title}"/>
+            </h:column>
+            
+             <!--  <h:column>
+                <f:facet name="header">
+                    <h:outputText value="group name" />
+                </f:facet>
+
+                <h:outputText value="#{sessionTools.getUserAlbums()}"/>
+            </h:column> -->
+
+           
+           
+       </h:dataTable>
+      
+         
+    
+    <br/>
+    <h:button value="create album"  outcome="create-album"/>
+    <h:messages globalOnly="true"/>
+    	<br/> <br/>
+<!--          <h:form>
+        <h:commandButton value="back" action="#{sessionTools.getPreviousView()}"/>
+       </h:form>-->
+        
+        <br/>
+            
+        <h:form>
+                <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
         </h:form>
     </h:body>
 </html>

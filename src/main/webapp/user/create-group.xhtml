@@ -17,9 +17,11 @@
         <h:form>
             <h:panelGrid columns = "3">
                 <label for="lastname">Nom:</label>
-                <h:inputText id="lastname" h5:placeholder="My Group" value="#{createGroup.current.name}"/>
-                <h:message for="lastname"/>
+                <h:inputText id="name" h5:placeholder="group" value="#{createGroup.current.name}"/>
+                <h:message for="name"/>
             </h:panelGrid>
+           
+           
             <label>Members:</label>
             <h:selectManyCheckbox id="members" layout="pageDirection" value="#{createGroup.current.members}">
                 <f:selectItems value="#{createGroup.users}"  var="u" itemLabel="#{u.email}"/>

@@ -34,8 +34,8 @@ import javax.inject.Named;
 @ViewScoped
 public class ViewAlbum implements Serializable {
     
-    /*@Inject
-    @Selected*/
+    @Inject
+    @Selected
     private Album current;
     
     @Inject
@@ -45,15 +45,15 @@ public class ViewAlbum implements Serializable {
     private CreatePhoto createPhoto;
     
     
-    //public List<CreatePhoto> getPhotos() {
-        public List<Photo> getPhotos() {
-        try {
-            return service.findAll(current);
-        } catch (SempicModelException ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cannot retrieve the photos",ex.getMessage()));
-        }
-        return Collections.emptyList();
-    }
+//    public List<CreatePhoto> getPhotos() {
+//        //public List<Photo> getPhotos() {
+//        try {
+//            return service.findAll(current);
+//        } catch (SempicModelException ex) {
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cannot retrieve the photos",ex.getMessage()));
+//        }
+//        return Collections.emptyList();
+//    }
 
     public Album getCurrent() {
         return current;

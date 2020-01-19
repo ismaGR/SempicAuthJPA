@@ -1,7 +1,7 @@
 import fr.uga.miashs.sempic.SempicModelException;
 import fr.uga.miashs.sempic.dao.SempicUserFacade;
 import fr.uga.miashs.sempic.entities.SempicUser;
-import fr.uga.miashs.sempic.model.datalayer.*;
+import fr.uga.miashs.sempic.dao.*;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
