@@ -34,8 +34,8 @@ import javax.inject.Named;
 @ViewScoped
 public class ViewAlbum implements Serializable {
     
-    /*@Inject
-    @Selected*/
+    @Inject
+    @Selected
     private Album current;
     
     @Inject

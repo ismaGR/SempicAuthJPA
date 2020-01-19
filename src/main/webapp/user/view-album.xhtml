@@ -12,33 +12,29 @@
     </h:head>
     <h:body>
         
-        <h1>Albums pour l'utilisateur</h1> <h:outputText value="#{sempicUser.current.lastname}"/>
+        <h1>Albums pour l'utilisateur <h:outputText value="#{sessionTools.connectedUser.lastname}"/> </h1>
         
         <h:dataTable class="table table-dark" id="users" value="#{listUsers.dataModel}" var="user"> 
             
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Lastname" />
+                    <h:outputText value="title" />
                 </f:facet>
 
-                <h:outputText value="#{user.lastname}"/>
+                <h:outputText value="#{viewAlbum.current.title}"/>
             </h:column>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Firstname" />
-                </f:facet>
-
-                <h:outputText value="#{user.firstname}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Firstname" />
-                </f:facet>
-            <h:form><h:link value="create album"  outcome="create-album"/></h:form>
-             </h:column>
+           
+           
        </h:dataTable>
+      
+         
+    
+    <br/>
+    <h:button value="create album"  outcome="create-album"/>
+    	
+            <h:messages globalOnly="true"/>
         <h:form>
                 <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
         </h:form>

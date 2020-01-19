@@ -6,40 +6,37 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Groupes pour l'utilisateur <h:outputText value="#{sempicUser.current.lastname}"/></title>
+        <title>Groupes pour l'utilisateur <h:outputText value="#{sessionTools.connectedUser.lastname}"/></title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>                
     </h:head>
     <h:body>
         
-        <h1>Groupes pour l'utilisateur <h:outputText value="#{sempicUser.current.lastname}"/></h1>
+        <h1>Groupes pour l'utilisateur <h:outputText value="#{sessionTools.connectedUser.lastname}"/></h1>
            <h:dataTable class="table table-dark" id="users" value="#{listUsers.dataModel}" var="user"> 
             
 
+            
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Lastname" />
+                    <h:outputText value="title" />
                 </f:facet>
 
-                <h:outputText value="#{user.lastname}"/>
+                <h:outputText value="#{sessionTools.connectedUser.groups}"/>
             </h:column>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Firstname" />
-                </f:facet>
-
-                <h:outputText value="#{user.firstname}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Firstname" />
-                </f:facet>
-                 <h:form><h:link value="create group"  outcome="create-group"/></h:form>
-             </h:column>
+        
+            
+               
        </h:dataTable>
+         <h:button value="create group"  outcome="create-group"/>
+     <h:messages globalOnly="true"/>
+     
+     <br/>
+     <br/>
         <h:form>
                 <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+                
                
         </h:form>
     </h:body>
