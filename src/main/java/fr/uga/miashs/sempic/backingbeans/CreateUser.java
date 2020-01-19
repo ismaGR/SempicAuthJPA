@@ -80,7 +80,10 @@ public class CreateUser implements Serializable {
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
             return "failure";
         }
-        
-        return "success";
+        if(this.getCurrent().getUserType().equals("ADMIN")){
+           return "admin"; 
+        }else{
+            return "user";
+        }
     }
 }

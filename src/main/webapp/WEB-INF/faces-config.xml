@@ -58,22 +58,33 @@
         </navigation-case>
     </navigation-rule>
     
+     <!--  user creation action result-->
     <navigation-rule>
         <description>User creation action result</description>
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-action>#{createUser.create()}</from-action>
-            <from-outcome>success</from-outcome>
+            <from-outcome>admin</from-outcome>
             <to-view-id>/admin/list-users.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        
         <navigation-case>
             <from-action>#{createUser.create()}</from-action>
             <from-outcome>failure</from-outcome>
             <to-view-id>/create-user.xhtml</to-view-id>
         </navigation-case>
-
     </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-action>#{createUser.create()}</from-action>
+            <from-outcome>user</from-outcome>
+            <to-view-id>/user/view-album.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Album & group-->
     <navigation-rule>
         <description>Album creation action result</description>
         <from-view-id>*</from-view-id>
@@ -112,7 +123,7 @@
             <navigation-case>
                 <from-action>#{createPhoto.create()}</from-action>
                 <from-outcome>success</from-outcome>
-                <to-view-id>/user/create-user.xhtml</to-view-id>
+                <to-view-id>/user/view-album.xhtml</to-view-id>
                 <redirect/>
             </navigation-case>
             <navigation-case>

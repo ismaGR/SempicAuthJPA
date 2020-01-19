@@ -60,7 +60,6 @@ public class SessionTools implements Serializable {
     private String previousView;
     private Map<String,String> currentParams;
     private Map<String,String> previousParams;
-
     /**
      * Creates a new instance of Login
      */
