@@ -52,12 +52,21 @@ public class SessionTools implements Serializable {
     @Inject
     private AlbumFacade albumDao;
     
+    @Inject
+    private GroupFacade groupDao;
+    
+    
+    @Selected
     private SempicUser connectedUser;
     private Album currentAlbum;
+    
     private List<Album> userAlbums;
     
+    private List<SempicGroup> userGroup;
+    
     private String currentView;
-    private String previousView;
+   
+	private String previousView;
     private Map<String,String> currentParams;
     private Map<String,String> previousParams;
     /**
@@ -189,6 +198,32 @@ public class SessionTools implements Serializable {
             throw new SempicException("getUserAlbums: "+e.getMessage());
         }
     }
+    
+//    @Produces
+//    @Selected
+//    @Dependent
+//    @Named
+//    public List<SempicGroup> findGroupOf() throws SempicException {
+//        
+//    }
+    @Produces
+    @Selected
+    @Dependent
+    @Named
+    public List<SempicGroup> getUserGroup() throws SempicException {
+    	try {            
+            SempicUser sempicUser = getConnectedUser(); 
+            this.userGroup = groupDao.findGroupOf(sempicUser);
+            return this.userGroup;
+        } catch (Exception e) {
+            throw new SempicException("getUserGroups: "+e.getMessage());
+        }
+		//return userGroup;
+	}
+
+	public void setUserGroup(List<SempicGroup> userGroup) {
+		this.userGroup = userGroup;
+	}
 
     public void setUserAlbums(List<Album>  albums){
         this.userAlbums = albums;

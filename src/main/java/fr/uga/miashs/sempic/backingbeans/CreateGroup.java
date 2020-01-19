@@ -11,6 +11,8 @@ import fr.uga.miashs.sempic.SempicModelException;
 import fr.uga.miashs.sempic.dao.SempicUserFacade;
 import fr.uga.miashs.sempic.entities.SempicGroup;
 import fr.uga.miashs.sempic.entities.SempicUser;
+import fr.uga.miashs.sempic.qualifiers.Selected;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,6 +43,10 @@ public class CreateGroup implements Serializable {
     
     @Inject
     private SempicUserFacade userDao;
+    
+    @Inject
+    @Selected
+    private SempicUser selectedUser;
 
     
     public CreateGroup() {
@@ -50,11 +56,13 @@ public class CreateGroup implements Serializable {
     @PostConstruct
     public void init() {
         current=new SempicGroup();
+        current.setOwner(selectedUser);
     }
     
     public void setOwnerId(String id) {
         System.out.println(id); 
-        current.setOwner(userDao.read(Long.valueOf(id)));
+        //current.setOwner(userDao.read(Long.valueOf(id)));
+        current.setOwner(selectedUser);
     }
     
     public String getOwnerId() {

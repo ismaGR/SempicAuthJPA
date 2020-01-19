@@ -1,4 +1,4 @@
-package fr.uga.miashs.sempic.model.datalayer;
+
 
 import java.awt.Graphics2D;
 import java.awt.Image;
