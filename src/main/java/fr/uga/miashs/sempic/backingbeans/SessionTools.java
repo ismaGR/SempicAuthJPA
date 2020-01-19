@@ -190,6 +190,9 @@ public class SessionTools implements Serializable {
         }
     }
 
+    public void setUserAlbums(List<Album>  albums){
+        this.userAlbums = albums;
+    }
     public Album setCurrentAlbum(Album album){
         SempicUser sempicUser = getConnectedUser(); 
         if(album != null && album.getAlbumId() > 0 &&
