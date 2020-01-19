@@ -65,6 +65,14 @@ public class CreatePhoto implements Serializable {
     @Selected
     private SempicUser selectedUser;
 
+    private SempicUser user;
+
+    public SempicUser getUser(){
+        return this.user;
+    }
+    public void setUser(SempicUser user){
+        this.user = user;
+    }
     private Photo current;
 
 
@@ -93,6 +101,7 @@ public class CreatePhoto implements Serializable {
     public void init() {
         this.current = new Photo();
         this.current.setAlbum(currentAlbum);
+        this.user = selectedUser;
     }
 
 

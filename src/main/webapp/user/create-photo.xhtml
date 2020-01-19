@@ -16,7 +16,7 @@
                 <h:inputFile id="file" h5:placeholder="My Photo File" value="#{createPhoto.file}"/>
                 <h:message for="title"/>
             </h:panelGrid>
-            <h:selectManyCheckbox id="albumId" layout="pageDirection" value="#{createUser.selectedUser.albums}" var="album">
+            <h:selectManyCheckbox id="albumId" layout="pageDirection" value="#{sessionTools.connectedUser.albums}" var="album">
                 <f:selectItems value="#{album.albumId}"  itemLabel="#{album.title}"/>
             </h:selectManyCheckbox>
 
