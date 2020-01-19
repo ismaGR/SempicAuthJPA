@@ -7,16 +7,17 @@
     </h:head>
     <h:body>
         
-        <h1> Bonjour user <h:outputText value="#{createUser.current.lastname}" /></h1>
+
+        <h1> Bonjour user <h:outputText value="#{sessionTools.connectedUser.lastname}"/></h1>
         <p>Bienvenue à la page principale utilisateur</p>
         
     <br/>
    
         Voir les <h:link outcome="view-album">Album</h:link><br/>
          Voir les <h:link outcome="view-group">Group</h:link><br/>
-        
-                <h:link outcome="goodbye">logout</h:link>
-       
+        <h:form>
+                <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+        </h:form>
     </h:body>
 </html>
 
