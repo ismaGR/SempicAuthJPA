@@ -32,7 +32,16 @@
 
                 <h:outputText value="#{user.firstname}"/>
             </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Firstname" />
+                </f:facet>
+            <h:form><h:link value="create album"  outcome="create-album"/></h:form>
+             </h:column>
        </h:dataTable>
+        <h:form>
+                <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+        </h:form>
     </h:body>
 </html>
 
