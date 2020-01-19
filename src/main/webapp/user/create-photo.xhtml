@@ -10,18 +10,21 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>                
     </h:head>
     <h:body>
-
-
+        <label>Albums:</label>
+        <h:selectOneMenu id="album" value="#{sessionTools.currentAlbum}">
+            <f:selectItems value="#{sessionTools.userAlbums}" />
+            <f:ajax event="change" execute="sessionTools.setCurrentAlbum()"/>
+        </h:selectOneMenu>
         <h:form method="POST"  enctype="multipart/form-data">
             <h:panelGrid columns = "3">
                 <label for="file">Photo:</label>
                 <h:inputFile id="file" h5:placeholder="My Photo File" value="#{createPhoto.file}"/>
                 <h:message for="file"/>
             </h:panelGrid>
-            <label>Albums:</label>
-            <h:selectManyCheckbox id="album" layout="pageDirection" value="#{sessionTools.userAlbums}" var="album">
+            <!--<label>Albums:</label>
+            <h:selectManyCheckbox id="album" name="albumId" layout="pageDirection" value="#{sessionTools.userAlbums}" var="album">
                 <f:selectItems value="#{sessionTools.userAlbums}" var="album"  itemLabel="#{album.title}"/>
-            </h:selectManyCheckbox>
+            </h:selectManyCheckbox>-->
             <h:commandButton value="Créer" action="#{createPhoto.create()}"/>
 
             <h:messages globalOnly="true"/>
