@@ -75,8 +75,12 @@ public class CreatePhoto implements Serializable {
     }
     private Photo current;
 
-
-
+    public Photo getCurrent(){
+        return this.current;
+    }
+    public void setCurrent(Photo photo){
+        this.current = photo;
+    }
     private List<Part> files;
 
     private Part file;

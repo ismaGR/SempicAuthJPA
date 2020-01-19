@@ -38,6 +38,8 @@ public class Photo implements Serializable {
     private Album album;
     
     private String filename;
+    
+    
 
     public long getPhotoId(){
         return photoId;
