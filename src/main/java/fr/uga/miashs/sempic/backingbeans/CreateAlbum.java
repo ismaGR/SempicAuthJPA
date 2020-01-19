@@ -60,6 +60,10 @@ public class CreateAlbum implements Serializable{
         
         current.setOwner(selectedUser);
     }
+    
+    public List<Album> findAll(){
+        return service.findAlbumsOf(selectedUser);
+    }
 
 
     public Album getCurrent() {

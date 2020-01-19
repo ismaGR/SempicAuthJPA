@@ -24,12 +24,21 @@ import javax.validation.constraints.NotNull;
  *
  * @author inhoa
  */
+
+
+
 @Entity
 @NamedQueries({
 @NamedQuery(
         name = "findUserAlbums",
         query = "SELECT DISTINCT a FROM Album a WHERE a.owner=:owner"
 )
+//,
+//    
+//@NamedQuery(
+//        name = "findAllAlbums",
+//        query = "SELECT DISTINCT a FROM Album a WHERE a.owner=:owner"
+//)
 })
 @Table(uniqueConstraints = {
     @UniqueConstraint(name = "UniqueAlbumNameForUser", columnNames = {"title","owner_id"})
