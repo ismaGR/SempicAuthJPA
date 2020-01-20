@@ -51,11 +51,21 @@ import javax.xml.bind.DatatypeConverter;
 @ViewScoped
 public class CreatePhoto implements Serializable {
     
-    @Inject
-    @Selected
-    private Album currentAlbum;    
+    //@Inject
+    //@Selected
+    private Album selectedtAlbum;    
 
     private Album album;
+
+    private Long albumId;
+
+    public Long getAlbumId(){
+        return this.albumId;
+    }
+
+    public void setAlbumId(Long id){
+        this.albumId=id;
+    }
 
     public Album getAlbum(){
         return this.album;
@@ -72,6 +82,11 @@ public class CreatePhoto implements Serializable {
     @Inject
     @Selected
     private SempicUser selectedUser;
+
+
+    @Inject
+    @Selected
+    private Album selectedAlbum;
 
     private SempicUser user;
 
@@ -112,8 +127,8 @@ public class CreatePhoto implements Serializable {
     @PostConstruct
     public void init() {
         this.current = new Photo();
-        this.current.setAlbum(currentAlbum);
         this.user = selectedUser;
+        this.album = selectedAlbum;
     }
 
 
@@ -173,32 +188,19 @@ public class CreatePhoto implements Serializable {
         }
     }    
     public String create() {
-        Album album = currentAlbum;
-        SessionTools st =new SessionTools();
-        Logger.getLogger(Album.class.getName()).log(Level.INFO, null, "CURRENT ALBUM SESSION TOOLS "+st);
-        Logger.getLogger(Album.class.getName()).log(Level.INFO, null, "CURRENT ALBUM SESSION TOOLS "+st.getConnectedUser());
+        Album album = albumDao.read(this.albumId);
+        Logger.getLogger(Album.class.getName()).log(Level.INFO, album+"", album);
+        
 
-        Logger.getLogger(Album.class.getName()).log(Level.INFO, null, "CURRENT ALBUM SESSION TOOLS "+st);
-        Long albumId = album.getAlbumId();     
-        Logger.getLogger(Album.class.getName()).log(Level.INFO, null, "CURRENT ALBUM ID "+albumId);
-        if (albumId != null) {
-            Long id = albumId;
-            album = albumDao.read(id);
-            Logger.getLogger(Album.class.getName()).log(Level.INFO, null, "CURRENT ALBUM LOADED OK  "+album);
-        }          
-
-        if (album==null) {
+        if (this.current.getAlbum()==null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("parameter albumId must be given"));
             return "failure";
         }
         Logger.getLogger(Album.class.getName()).log(Level.INFO, null, album);
-        boolean partiallyFailed=false;
-       
-
+        boolean partiallyFailed=false;       
             Logger.getLogger(Album.class.getName()).log(Level.INFO, null, file);
             current=new Photo();
             current.setAlbum(album);
-
             try {
                 service.create(current,file.getInputStream());
             } catch (SempicModelException ex) {

@@ -72,6 +72,10 @@ public class Album implements Serializable{
         return albumId;
     }
 
+    public void setAlbumId(Long id){
+        this.albumId=id;
+    }
+
     public SempicUser getOwner() {
         return owner;
     }
@@ -89,6 +93,9 @@ public class Album implements Serializable{
 
     public Set<Photo> getPhotos() {
         return photos;
+    }
+    public void addPhoto(Photo photo){
+        this.photos.add(photo);
     }
 
     @Override

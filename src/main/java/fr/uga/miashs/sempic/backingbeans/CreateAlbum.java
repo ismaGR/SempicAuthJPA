@@ -8,6 +8,7 @@ package fr.uga.miashs.sempic.backingbeans;
 import fr.uga.miashs.sempic.SempicModelException;
 import fr.uga.miashs.sempic.dao.AlbumFacade;
 import fr.uga.miashs.sempic.entities.Album;
+import fr.uga.miashs.sempic.entities.Photo;
 import fr.uga.miashs.sempic.entities.SempicUser;
 import fr.uga.miashs.sempic.qualifiers.Selected;
 import java.io.Serializable;
@@ -35,9 +36,6 @@ import javax.faces.context.FacesContext;
 public class CreateAlbum implements Serializable{
     
 
-    @Inject
-    @Selected
-    private Album currentAlbum;    
 
     private Album current;
     
@@ -74,6 +72,7 @@ public class CreateAlbum implements Serializable{
         this.current = current;
     }
     
+
     public String create() {
         //System.out.println(current);
         

@@ -26,8 +26,15 @@
 
                 <h:outputText value="#{album.owner.email}"/>
             </h:column>
+            <h:column>
+                <h:button value="Add photo" outcome="create-photo">
+                    <f:param name="albumId" value="#{album.albumId}"/>
+                </h:button>
+            </h:column>            
         </h:dataTable>
-
+        <br/>
+            
+        <h:button value="create album"  outcome="create-album"/>
     </h:body>
 </html>
 

@@ -37,7 +37,28 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
-    
+
+    <navigation-rule>
+        <description>Create photo</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>create-photo</from-outcome>
+            <to-view-id>/user/create-photo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>    
+
+
+    <navigation-rule>
+        <description>Create album page</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>create-album</from-outcome>
+            <to-view-id>/user/create-album.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>    
+
     <navigation-rule>
         <description>List users page</description>
         <from-view-id>*</from-view-id>
@@ -94,7 +115,7 @@
         <navigation-case>
             <from-action>#{createAlbum.create()}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/user/create-photo.xhtml</to-view-id>
+            <to-view-id>/user/list-albums.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>

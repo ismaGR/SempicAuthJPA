@@ -58,6 +58,7 @@ public class SessionTools implements Serializable {
     
     @Selected
     private SempicUser connectedUser;
+    @Selected
     private Album currentAlbum;
     
     private List<Album> userAlbums;
@@ -167,19 +168,24 @@ public class SessionTools implements Serializable {
         this.currentAlbum = currentAlbum;
     }
 
+    public Album getCurrentAlbum(){
+        return this.currentAlbum;
+    }
+
     @Produces
     @Selected
     @Dependent
     @Named
-    public Album getCurrentAlbum() throws SempicException {
+    public Album getSelectedAlbum() throws SempicException {
         String albumId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("albumId");
+        Logger.getLogger(SessionTools.class.getName()).log(Level.INFO, "setCurrentAlbum"+albumId, "setCurrentAlbum"+albumId);
         try {            
             SempicUser sempicUser = getConnectedUser();          
             if (albumId != null) {
                 long id = Long.parseLong(albumId);
                 Album album = albumDao.read(id);
                 if((album != null && album.getAlbumId() > 0) && 
-                (currentAlbum.getOwner().getId() == sempicUser.getId()) 
+                (currentAlbum != null && currentAlbum.getOwner().getId() == sempicUser.getId()) 
                 || sempicUser.getUserType() == SempicUserType.ADMIN){
                     currentAlbum = albumDao.read(id);
                     return currentAlbum;
@@ -238,9 +244,9 @@ public class SessionTools implements Serializable {
     public void setUserAlbums(List<Album>  albums){
         this.userAlbums = albums;
     }
-    public void selectAlbum(){  
+    public String selectAlbum(){  
         Album album = this.currentAlbum;
-        Logger.getLogger(SessionTools.class.getName()).log(Level.INFO, null, "setCurrentAlbum"+album.toString());
+        Logger.getLogger(SessionTools.class.getName()).log(Level.INFO, "setCurrentAlbum"+album.toString(), "setCurrentAlbum"+album);
         SempicUser sempicUser = getConnectedUser(); 
         if(album != null && album.getAlbumId() > 0 &&
         ((currentAlbum != null || (currentAlbum.getOwner().getId() == sempicUser.getId())) 
@@ -253,6 +259,7 @@ public class SessionTools implements Serializable {
             this.currentAlbum = new Album();
         }    
         Logger.getLogger(SessionTools.class.getName()).log(Level.INFO, null, "selectAlbum"+currentAlbum.toString());
+        return "success";
     }
 
 
