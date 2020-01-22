@@ -5,7 +5,6 @@
  */
 package fr.uga.miashs.sempic.entities;
 
-
 import java.io.InputStream;
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -16,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -34,6 +34,7 @@ public class Photo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long photoId;
     
+    @NotNull
     @ManyToOne
     private Album album;
     

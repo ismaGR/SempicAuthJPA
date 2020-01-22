@@ -63,6 +63,28 @@ public class SessionTools implements Serializable {
     
     private List<Album> userAlbums;
     
+    private Long albumId;
+
+    public Long getAlbumId(){
+        return this.albumId;
+    }
+    public void setAlbumId(){
+        Long albumIdUri = Long.parseLong(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("albumId"));
+        if(albumIdUri > 0){
+            this.albumId = albumIdUri;
+        }
+    }
+    public void setAlbumId(Long albumId){
+        Long albumIdUri = Long.parseLong(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("albumId"));
+        if(albumIdUri > 0){
+            this.albumId = albumIdUri;
+        }
+        else
+        {
+            this.albumId = albumId;
+        }
+    }
+
     private List<SempicGroup> userGroup;
     
     private String currentView;
@@ -185,9 +207,10 @@ public class SessionTools implements Serializable {
                 long id = Long.parseLong(albumId);
                 Album album = albumDao.read(id);
                 if((album != null && album.getAlbumId() > 0) && 
-                (currentAlbum != null && currentAlbum.getOwner().getId() == sempicUser.getId()) 
+                (album.getOwner().getId() == sempicUser.getId()) 
                 || sempicUser.getUserType() == SempicUserType.ADMIN){
-                    currentAlbum = albumDao.read(id);
+                    currentAlbum = album;
+                    this.albumId = album.getAlbumId();
                     return currentAlbum;
                 }                  
             }
