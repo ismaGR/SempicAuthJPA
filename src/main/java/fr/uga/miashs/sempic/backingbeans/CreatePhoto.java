@@ -128,7 +128,7 @@ public class CreatePhoto implements Serializable {
     public void init() {
         this.current = new Photo();
         this.user = selectedUser;
-        this.album = selectedAlbum;
+        //this.album = selectedAlbum;
     }
 
 
