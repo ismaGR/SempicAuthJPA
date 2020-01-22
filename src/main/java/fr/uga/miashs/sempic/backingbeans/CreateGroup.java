@@ -43,6 +43,9 @@ public class CreateGroup implements Serializable {
     
     @Inject
     private SempicUserFacade userDao;
+
+    @Inject
+    private SessionTools st;
     
     @Inject
     @Selected
@@ -85,15 +88,18 @@ public class CreateGroup implements Serializable {
     }
     
     public String create() {
-        System.out.println(current);
+        System.out.println(current); 
+        String res = "";
         
         try {
+            if(st.isAdmin()) { res = "admin";
+        }else res="user";
             groupDao.create(current);
-        } catch (SempicModelException ex) {
+        } catch (SempicModelException ex) { res= "failure";
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
-            return "failure";
+            return res;
         }
         
-        return "success";
+        return res;
     }
 }

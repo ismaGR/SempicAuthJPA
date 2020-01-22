@@ -9,7 +9,7 @@ package fr.uga.miashs.sempic.dao;
 import fr.uga.miashs.sempic.entities.SempicGroup;
 import fr.uga.miashs.sempic.entities.SempicUser;
 import java.util.List;
-import javax.ejb.Stateful;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -24,7 +24,8 @@ public class GroupFacade extends AbstractJpaFacade<Long,SempicGroup>{
         super(SempicGroup.class);
     }
     
-    public List<SempicGroup> findGroupOf(SempicUser owner) {
+    
+    public List<SempicGroup> findAll(SempicUser owner) {
         Query q = getEntityManager().createNamedQuery("findGroupOf");
         q.setParameter("owner", owner);
         return q.getResultList();

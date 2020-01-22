@@ -229,7 +229,7 @@ public class SessionTools implements Serializable {
     public List<SempicGroup> getUserGroup() throws SempicException {
     	try {            
             SempicUser sempicUser = getConnectedUser(); 
-            this.userGroup = groupDao.findGroupOf(sempicUser);
+            this.userGroup = groupDao.findAll(sempicUser);
             return this.userGroup;
         } catch (Exception e) {
             throw new SempicException("getUserGroups: "+e.getMessage());
