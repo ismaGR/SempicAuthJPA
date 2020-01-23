@@ -51,20 +51,20 @@ import javax.xml.bind.DatatypeConverter;
 @ViewScoped
 public class CreatePhoto implements Serializable {
     
-    //@Inject
-    //@Selected
+    @Inject
+    @Selected
     private Album selectedtAlbum;    
 
     private Album album;
 
-    private Long albumId;
-
-    public Long getAlbumId(){
-        return this.albumId;
+    public String getAlbumId(){
+        if (this.current.getAlbum()==null)
+            return "-1";  
+        return this.current.getAlbum().getAlbumId()+"";
     }
 
-    public void setAlbumId(Long id){
-        this.albumId=id;
+    public void setAlbumId(String id){
+        this.current.setAlbum(selectedtAlbum);
     }
 
     public Album getAlbum(){
@@ -188,7 +188,7 @@ public class CreatePhoto implements Serializable {
         }
     }    
     public String create() {
-        Album album = albumDao.read(this.albumId);
+        Album album = this.current.getAlbum();
         Logger.getLogger(Album.class.getName()).log(Level.INFO, album+"", album);
         
 
