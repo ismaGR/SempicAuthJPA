@@ -5,27 +5,65 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
-        <title>Liste des albums</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <title>Liste des photos</title>
+        <style>
+.popover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1060;
+    display: block;
+    max-width: 276px;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    word-spacing: normal;
+    white-space: normal;
+    line-break: auto;
+    font-size: .875rem;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    min-width: 800px;
+}
+            </style>
     </h:head>
+
     <h:body>
 
-        <h:dataTable class="table table-dark" id="albums" value="#{sessionTools.userAlbums}" var="album">
+        <h:dataTable class="table" id="albums" value="#{sessionTools.userAlbums}" var="album">
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Title" />
+                    <h:outputText value="#{album.title}" />
                 </f:facet>
 
                 <h:outputText value="#{album.title}"/>
 
-                <h:dataTable class="table table-dark" id="photos" value="#{album.photos}" var="photo">
+                <h:dataTable class="table" id="photos" value="#{album.photos}" var="photo" rendered="#{not empty album.photos}">
 
                     <h:column>
-                        
-                        <h:outputText value="#{photo.path}"/>
-                        <h:graphicImage value="#{photo.path}" />
 
+                        <div class="container">
+                            <h3><h:outputText value="#{photo.photoId}"/></h3>
+                            <a href="#"  data-toggle="popover" data-img="/SempicJPA-1.1#{photo.path}" title="Image Overview" >                                
+                                <h:graphicImage value="#{photo.thumbpath}" />
+                            </a>
+                          </div>
                     </h:column>
                 </h:dataTable>
                 
@@ -37,5 +75,19 @@
             
         <h:button value="create album"  outcome="create-photo"/>
     </h:body>
+    <script>
+$(document).ready(function(){
+	 $('[data-toggle="popover"]').popover({
+          //trigger: 'focus',
+		  trigger: 'hover',
+          html: true,
+          content: function () {
+
+				return '<img class="img-fluid" src="'+$(this).data('img') + '" style="width:700px;"/>';
+          },
+          title: 'Toolbox'
+    }) 
+});    
+    </script>
 </html>
 

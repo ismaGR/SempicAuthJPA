@@ -42,6 +42,7 @@ public class RestApplication extends Application{
         }
         res.add(MOXyJsonProvider.class);
         res.add(SempicUserService.class);
+        res.add(PhotoStore.class);
         
         
         
