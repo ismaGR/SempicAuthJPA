@@ -17,7 +17,7 @@
             </navigation-case>
         </navigation-rule>
     -->
-    
+            <!-- User creation page-->
     <navigation-rule>
         <description>Create user page</description>
         <from-view-id>*</from-view-id>
@@ -27,7 +27,7 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
-    
+            <!-- Group creation page-->
     <navigation-rule>
         <description>Create group page</description>
         <from-view-id>*</from-view-id>
@@ -37,7 +37,7 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
-
+            <!-- Photo creation page-->
     <navigation-rule>
         <description>Create photo</description>
         <from-view-id>*</from-view-id>
@@ -48,7 +48,7 @@
         </navigation-case>
     </navigation-rule>    
 
-
+            <!-- Album creation page-->
     <navigation-rule>
         <description>Create album page</description>
         <from-view-id>*</from-view-id>
@@ -109,6 +109,7 @@
     </navigation-rule>
     
     <!-- Album & group-->
+             <!-- Album creation result-->
     <navigation-rule>
         <description>Album creation action result</description>
         <from-view-id>*</from-view-id>
@@ -125,6 +126,7 @@
         </navigation-case>
     </navigation-rule>
 
+            <!-- Group creation result-->
         <navigation-rule>
             <description>Group creation action result</description>
             <from-view-id>*</from-view-id>
@@ -147,6 +149,7 @@
             </navigation-case>
         </navigation-rule>
 
+                <!-- Photo creation result-->
         <navigation-rule>
             <description>Photo creation action result</description>
             <from-view-id>*</from-view-id>
