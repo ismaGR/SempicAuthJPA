@@ -153,14 +153,14 @@
             <navigation-case>
                 <from-action>#{createPhoto.create()}</from-action>
                 <from-outcome>success</from-outcome>
-                <to-view-id>/user/view-album.xhtml</to-view-id>
+                <to-view-id>/user/list-photos.xhtml</to-view-id>
                 <redirect/>
             </navigation-case>
             <navigation-case>
                 <from-action>#{createPhoto.create()}</from-action>
                 <from-outcome>failure</from-outcome>
                 <!-- <to-view-id>#{view.viewId}</to-view-id> --> 
-                 <to-view-id>/user/view-album.xhtml</to-view-id>
+                 <to-view-id>/user/list-photos.xhtml</to-view-id>
             </navigation-case>
         </navigation-rule>
 

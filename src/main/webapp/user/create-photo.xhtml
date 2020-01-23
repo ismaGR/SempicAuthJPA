@@ -20,7 +20,6 @@
                 <label for="file">Photo:</label>
                 <h:inputFile id="file" h5:placeholder="My Photo File" value="#{createPhoto.file}"/>
                 <h:message for="file"/> 
-                <h:inputText id="albumId" name="albumId" value="#{sessionTools.albumId}" />
             </h:panelGrid>
             
             <h:commandButton value="Créer" action="#{createPhoto.create()}"/>

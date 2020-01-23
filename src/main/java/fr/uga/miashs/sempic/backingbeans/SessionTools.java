@@ -73,16 +73,12 @@ public class SessionTools implements Serializable {
         if(albumIdUri > 0){
             this.albumId = albumIdUri;
         }
+        else{
+            this.albumId = null;
+        }
     }
     public void setAlbumId(Long albumId){
-        Long albumIdUri = Long.parseLong(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("albumId"));
-        if(albumIdUri > 0){
-            this.albumId = albumIdUri;
-        }
-        else
-        {
-            this.albumId = albumId;
-        }
+        this.albumId = albumId;
     }
 
     private List<SempicGroup> userGroup;
