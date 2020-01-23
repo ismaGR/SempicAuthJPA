@@ -5,8 +5,8 @@
  */
 package fr.uga.miashs.sempic.entities;
 
-import java.io.InputStream;
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -34,6 +33,9 @@ public class Photo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long photoId;
     
+    static String WEBAPI = "/webapi/picture";
+    static String THUMB_WIDTH = "250";
+
     @NotNull
     @ManyToOne
     private Album album;
@@ -41,7 +43,9 @@ public class Photo implements Serializable {
     private String filename;
     
     private String path;
+    private String thumbpath;
     
+    static String DIR = "/images/originals/";
 
     public long getPhotoId(){
         return photoId;
@@ -64,11 +68,14 @@ public class Photo implements Serializable {
     }
 
     public String getPath() {
-        path =  getAlbum().getAlbumId()+"/"+getPhotoId();
+        path =  WEBAPI+"/"+ getAlbum().getAlbumId()+"/"+getPhotoId();
         return path;
     }
-
-    
+    public String getThumbpath() {
+        //webapi/picture/3/4?width=450
+        thumbpath =  WEBAPI+"/"+ getAlbum().getAlbumId()+"/"+getPhotoId()+"?width="+THUMB_WIDTH;
+        return thumbpath;
+    }
     
     
     
