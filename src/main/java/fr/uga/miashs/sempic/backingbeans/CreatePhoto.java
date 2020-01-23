@@ -57,8 +57,10 @@ public class CreatePhoto implements Serializable {
 
     private Album album;
 
-    public Long getAlbumId(){
-        return this.current.getAlbum().getAlbumId();
+    public String getAlbumId(){
+        if (this.current.getAlbum()==null)
+            return "-1";  
+        return this.current.getAlbum().getAlbumId()+"";
     }
 
     public void setAlbumId(String id){

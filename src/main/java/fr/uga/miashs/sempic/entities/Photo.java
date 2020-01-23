@@ -40,6 +40,7 @@ public class Photo implements Serializable {
     
     private String filename;
     
+    private String path;
     
 
     public long getPhotoId(){
@@ -63,7 +64,8 @@ public class Photo implements Serializable {
     }
 
     public String getPath() {
-        return getAlbum().getAlbumId()+"/"+getPhotoId();
+        path =  getAlbum().getAlbumId()+"/"+getPhotoId();
+        return path;
     }
 
     

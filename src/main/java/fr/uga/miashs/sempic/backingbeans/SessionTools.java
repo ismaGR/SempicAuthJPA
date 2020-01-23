@@ -196,7 +196,7 @@ public class SessionTools implements Serializable {
     @Named
     public Album getSelectedAlbum() throws SempicException {
         String albumId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("albumId");
-        Logger.getLogger(SessionTools.class.getName()).log(Level.INFO, "setCurrentAlbum"+albumId, "setCurrentAlbum"+albumId);
+        Logger.getLogger(SessionTools.class.getName()).log(Level.INFO, "setCurrentAlbum: "+albumId, "setCurrentAlbum"+albumId);
         try {            
             SempicUser sempicUser = getConnectedUser();          
             if (albumId != null) {

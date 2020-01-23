@@ -22,11 +22,10 @@
                 <h:dataTable class="table table-dark" id="photos" value="#{album.photos}" var="photo">
 
                     <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="photo" />
-                        </f:facet>
-        
-                        <h:outputText value="#{photo}"/>
+                        
+                        <h:outputText value="#{photo.path}"/>
+                        <h:graphicImage value="#{photo.path}" />
+
                     </h:column>
                 </h:dataTable>
                 
