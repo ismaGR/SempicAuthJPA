@@ -9,6 +9,8 @@ import fr.uga.miashs.sempic.SempicModelException;
 import fr.uga.miashs.sempic.SempicModelUniqueException;
 import fr.uga.miashs.sempic.dao.SempicUserFacade;
 import fr.uga.miashs.sempic.entities.SempicUser;
+import fr.uga.miashs.sempic.qualifiers.Selected;
+
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.Transient;
 import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import javax.validation.constraints.NotBlank;
 
@@ -35,7 +38,11 @@ public class CreateUser implements Serializable {
     
     @Inject
     private SempicUserFacade userDao;
-    
+
+    @Inject
+    @Selected
+    private SempicUser selectedUser;
+
     public CreateUser() {
     }
     
@@ -86,4 +93,52 @@ public class CreateUser implements Serializable {
             return "user";
         }
     }
+
+    public Boolean verifMdp() throws Exception{
+        Boolean res= true;
+        
+        if(selectedUser.getPassword().equals(selectedUser.getTempstr())){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Les mots de passe sont différents!, veuillez confirmer avec le même mot de passe"));
+         res=false;
+        }
+
+            return res;
+    }
+
+    public Boolean allowUpdate() throws Exception{
+        Boolean res= false;
+        if(verifMdp()){
+            try{
+               if(userDao.readByEmail(selectedUser.getEmail())==null){
+                    userDao.update(selectedUser);
+               }
+            }catch(SempicModelException ex) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("un utilisateur avec cette adresse mail existe déjà"));
+            }
+        }
+             if(selectedUser.getUserType().equals("ADMIN")){
+                res= true;
+            }else{
+                res= false;
+            }
+            return res;
+    }
+
+    public String update() throws Exception{
+        String res = "false";
+        if(userDao.readByEmail(selectedUser.getEmail())!=null)
+        try {
+           userDao.update(selectedUser);
+           res="sucess";
+        } 
+        catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Echec update"));
+            res= "failure";
+        }
+
+        return res;
+
+    }
+
+    
 }
