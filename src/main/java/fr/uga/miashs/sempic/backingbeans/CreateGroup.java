@@ -74,7 +74,9 @@ public class CreateGroup implements Serializable {
         return ""+current.getOwner().getId();
     }
 
-    
+    public List<SempicGroup> getGroups() {
+        return groupDao.findAll();
+    }    
     public List<SempicUser> getUsers() {
         return userDao.findAll();
     }

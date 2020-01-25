@@ -33,11 +33,12 @@
             </h:column>
             <h:column>
                 <h:form>
-                <label>groups:</label>
-                <h:selectManyCheckbox id="groups" layout="pageDirection" value="#{createAlbum.current.groups}">
-                    <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.title}"/>
-                </h:selectManyCheckbox>            
-                <h:commandButton value="Créer" action="#{createAlbum.save()}"/>
+                    <input type="hidden" name="albumId" value="#{album.albumId}" />
+                    <label>groups:</label>
+                    <h:selectManyCheckbox id="groups" layout="pageDirection" value="#{createAlbum.current.groups}">
+                        <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.title}"/>
+                    </h:selectManyCheckbox>            
+                    <h:commandButton value="Créer" action="#{createAlbum.save()}"/>
             </h:form>
             </h:column>            
         
