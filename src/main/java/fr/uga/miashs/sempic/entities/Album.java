@@ -6,6 +6,7 @@
 package fr.uga.miashs.sempic.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -64,7 +65,7 @@ public class Album implements Serializable{
     @OneToMany(fetch = FetchType.EAGER, mappedBy="album")
     private Set<Photo> photos;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy="album")
+    @ManyToMany
     private Set<SempicGroup> groups;
 
 
@@ -100,8 +101,14 @@ public class Album implements Serializable{
     public Set<SempicGroup> getGroups() {
         return groups;
     }
-    public void addGroup(Group group){
-        this.groups.add(group);
+    public void addGroup(SempicGroup group){
+        if (groups==null) {
+            groups = new HashSet<>();
+        }        
+        groups.add(group);
+    }
+    public void setGroups(Set<SempicGroup> groups){
+        this.groups=groups;
     }
 
     public Set<Photo> getPhotos() {

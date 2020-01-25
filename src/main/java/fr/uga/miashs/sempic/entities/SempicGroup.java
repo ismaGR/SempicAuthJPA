@@ -56,6 +56,26 @@ public class SempicGroup implements Serializable {
     @ManyToMany
     private Set<SempicUser> members;
 
+    /*
+    @ManyToMany(mappedBy="groups")
+    private Set<Album> albums;
+
+
+    public Set<Album> getAlbums(){
+        return this.albums;
+    }
+    public void addAlbum(Album album){
+        if(albums == null){
+            this.albums = new HashSet<>();
+        }
+        this.albums.add(album);
+    }
+    
+    public void setAlbums(Set<Album> albums){
+        this.albums=albums;
+    }    
+
+*/
     public SempicGroup() {
         
     }
@@ -132,9 +152,7 @@ public class SempicGroup implements Serializable {
         return "Group{" + "id=" + id + ", name=" + name + ", owner=" + owner + '}';
     }
     
-    
-    
-    
+
     
     
 }
