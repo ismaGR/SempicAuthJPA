@@ -27,6 +27,39 @@ public class AlbumFacade extends AbstractJpaFacade<Long, Album> {
         q.setParameter("owner", owner);
         return q.getResultList();
     } 
+
+    public Album getByName(String titre, Long owner_id){
+        try{
+          
+        Query q =  getEntityManager().createQuery("Select a FROM Album a " + 
+         "WHERE a.titre=:titre and a.owner_id=:owner_id").setParameter("owner_id", owner_id).setParameter("titre", titre);
+             return (Album) q.getSingleResult();
+        }  catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public List<Album> getByUser(SempicUser owner){
+        try{
+            
+            Query q =  getEntityManager().createQuery("Select a FROM Album a " + 
+                            "WHERE a.owner.id=:owner.id").setParameter("owner", owner);
+               return q.getResultList();
+        }  catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public Album getById(Long id){
+        try{
+           
+              Query q = getEntityManager().createQuery("Select a FROM Album a " + 
+                            "WHERE a.id=:id").setParameter("id", id);
+             return (Album)  q.getSingleResult();
+        }  catch (Exception e) {
+            return null;
+        }
+    }
     
    
     

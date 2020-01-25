@@ -58,6 +58,8 @@ public class SessionTools implements Serializable {
     
     @Selected
     private SempicUser connectedUser;
+
+    
     @Selected
     private Album currentAlbum;
     

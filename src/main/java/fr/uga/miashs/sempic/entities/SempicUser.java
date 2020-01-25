@@ -68,12 +68,12 @@ public class SempicUser implements Serializable {
     
     @NotBlank(message="Un mot de passe doit être donné")
     private String passwordHash;
-
-    @Transient
-    private transient String tempstr;
     
     @Transient
     private transient String password;
+
+    @Transient
+    private transient String tempstr;
     
     @OneToMany(mappedBy = "owner",cascade = CascadeType.REMOVE)
     private Set<SempicGroup> groups;

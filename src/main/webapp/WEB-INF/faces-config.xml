@@ -23,7 +23,7 @@
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>create-user</from-outcome>
-            <to-view-id>create-user.xhtml</to-view-id>
+            <to-view-id>./create-user.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -89,7 +89,12 @@
 	            <to-view-id>/admin/list-users.xhtml</to-view-id>
 	            <redirect/>
 	        </navigation-case>
-        
+            <navigation-case>
+                <from-action>#{createUser.create()}</from-action>
+                <from-outcome>user</from-outcome>
+                <to-view-id>/user/user-view.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
 	        <navigation-case>
 	            <from-action>#{createUser.create()}</from-action>
 	            <from-outcome>failure</from-outcome>
@@ -97,12 +102,25 @@
 	        </navigation-case>
     </navigation-rule>
     
+    
+    
+      
+    
+
+    <!--  user update action result-->
+
     <navigation-rule>
-    <description>User creation action result</description>
+    <description>User update action result</description>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{createUser.create()}</from-action>
-            <from-outcome>user</from-outcome>
+            <from-action>#{createUser.update()}</from-action>
+            <from-outcome>sucess</from-outcome>
+            <to-view-id>/user/user-view.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{createUser.update()}</from-action>
+            <from-outcome>failure</from-outcome>
             <to-view-id>/user/user-view.xhtml</to-view-id>
             <redirect/>
         </navigation-case>

@@ -5,7 +5,7 @@
       xmlns:h5="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Création d'un utilisateur</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>                
+                        
     </h:head>
     <h:body>
 
@@ -25,7 +25,7 @@
                 <h:message for="email"/>
 
                 <label for="password">Password</label>
-                <h:inputSecret id="password" value="#{createUser.password}"/>
+                <h:inputSecret id="password" value="#{createUser.current.password}"/>
                 <h:message for="password"/>
 
                 <h:commandButton value="Créer" action="#{createUser.create()}"/>

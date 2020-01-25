@@ -87,7 +87,7 @@ public class CreateUser implements Serializable {
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
             return "failure";
         }
-        if(this.getCurrent().getUserType().equals("ADMIN")){
+        if(this.getCurrent().getPassword().equals("ADMIN")){
            return "admin"; 
         }else{
             return "user";
@@ -107,15 +107,6 @@ public class CreateUser implements Serializable {
 
     public Boolean allowUpdate() throws Exception{
         Boolean res= false;
-        if(verifMdp()){
-            try{
-               if(userDao.readByEmail(selectedUser.getEmail())==null){
-                    userDao.update(selectedUser);
-               }
-            }catch(SempicModelException ex) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("un utilisateur avec cette adresse mail existe déjà"));
-            }
-        }
              if(selectedUser.getUserType().equals("ADMIN")){
                 res= true;
             }else{
@@ -128,11 +119,17 @@ public class CreateUser implements Serializable {
         String res = "false";
         if(userDao.readByEmail(selectedUser.getEmail())!=null)
         try {
-           userDao.update(selectedUser);
+            if(selectedUser.getTempstr().equals(selectedUser.getPassword())){
+           userDao.update(selectedUser); selectedUser.setTempstr("Utilisateur Modifié avec succes");
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Utilisateur Modifié avec succes"));
            res="sucess";
+            }else { 
+                res="failure";
+                selectedUser.setTempstr("mot de passe différent !");
+            }         
         } 
         catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Echec update"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Echec de la Modification de l'utilisateur"));
             res= "failure";
         }
 
