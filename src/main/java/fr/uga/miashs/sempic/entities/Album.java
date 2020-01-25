@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -63,6 +64,10 @@ public class Album implements Serializable{
     @OneToMany(fetch = FetchType.EAGER, mappedBy="album")
     private Set<Photo> photos;
 
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy="album")
+    private Set<SempicGroup> groups;
+
+
     public Album() {}
     
     public Album(SempicUser u) {
@@ -90,6 +95,13 @@ public class Album implements Serializable{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Set<SempicGroup> getGroups() {
+        return groups;
+    }
+    public void addGroup(Group group){
+        this.groups.add(group);
     }
 
     public Set<Photo> getPhotos() {
