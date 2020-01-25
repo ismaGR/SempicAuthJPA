@@ -48,6 +48,14 @@ public class CreateAlbum implements Serializable{
     private SempicUser selectedUser;
 
 
+    private Long albumId;
+
+    public Long getAlbumId(){
+        return albumId;
+    }
+    public void setAlbumId(Long albumId){
+        this.albumId = albumId;
+    }
     public CreateAlbum() {
         
     }
@@ -75,8 +83,11 @@ public class CreateAlbum implements Serializable{
 
     public String save(){
         try {
-            //SessionTools st = new SessionTools();            
-            service.update(current);
+            String albumIdRequest = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("albumId");
+            albumId = Long.parseLong(albumIdRequest);
+            Album album=service.read(albumId);
+            album.setGroups(current.getGroups());       
+            service.update(album);
             //st.setCurrentAlbum(current);
         } catch (SempicModelException ex) {
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));

@@ -57,7 +57,7 @@ public class SempicGroup implements Serializable {
     private Set<SempicUser> members;
 
     
-    @ManyToMany(mappedBy="groups")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy="groups")
     private Set<Album> albums;
 
 

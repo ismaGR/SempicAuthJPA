@@ -10,7 +10,7 @@
     </h:head>
     <h:body>
 
-        <h:dataTable class="table table-dark" id="albums" value="#{sessionTools.userAlbums}" var="album">
+        <h:dataTable class="table" id="albums" value="#{sessionTools.userAlbums}" var="album">
 
             <h:column>
                 <f:facet name="header">
@@ -32,16 +32,19 @@
                 </h:button>
             </h:column>
             <h:column>
+                Shared with:
+                <h:dataTable class="table" id="albums" value="#{album.groups}" var="group">
+                    <h:outputText value="#{group.name}"/>
+                </h:dataTable>
                 <h:form>
-                    <input type="hidden" name="albumId" value="#{album.albumId}" />
+                    <input type="hidden" name="albumId" binding="#{createAlbum.albumId}" value="#{album.albumId}" />
                     <label>groups:</label>
                     <h:selectManyCheckbox id="groups" layout="pageDirection" value="#{createAlbum.current.groups}">
-                        <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.title}"/>
+                        <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.name}"/>
                     </h:selectManyCheckbox>            
                     <h:commandButton value="Créer" action="#{createAlbum.save()}"/>
             </h:form>
             </h:column>            
-        
         </h:dataTable>
         <br/>
             

@@ -65,7 +65,7 @@ public class Album implements Serializable{
     @OneToMany(fetch = FetchType.EAGER, mappedBy="album")
     private Set<Photo> photos;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<SempicGroup> groups;
 
 
