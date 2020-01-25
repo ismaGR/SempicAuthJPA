@@ -22,8 +22,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Jerome David <jerome.david@univ-grenoble-alpes.fr>
  */
-//@XmlRootElement
-//@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 @Entity
 @NamedQueries({
 @NamedQuery(

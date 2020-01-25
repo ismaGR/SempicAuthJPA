@@ -1,38 +1,47 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:h5="http://xmlns.jcp.org/jsf/passthrough">
+ xmlns:h="http://java.sun.com/jsf/html"> 
     <h:head>
-        <title>Création d'un utilisateur</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>                
+        <meta charset="utf-8" />
+        <title>update</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+       
     </h:head>
     <h:body>
+      <h:form>
+         <fieldset>
+             <legend>Modifier user</legend>
+             
+             <h:outputLabel for="lastname">Lastname <span class="requis">*</span></h:outputLabel>
+             <h:inputText id="lastname" value="#{sessionTools.selectedUser.lastname}" required="true" size="20" maxlength="20" />
+             <h:message id="lastnameMessage" for="lastname" errorClass="erreur" />
+             <br />
 
-
-        <h:form>
-            <h:panelGrid columns = "3">
-                <label for="lastname">Nom:</label>
-                <h:inputText id="lastname" h5:placeholder="Dupond" value="#{createUser.current.lastname}"/>
-                <h:message for="lastname"/>
-
-                <label for="firstname">Prenom:</label>
-                <h:inputText id="firstname" value="#{createUser.current.firstname}"/>
-                <h:message for="firstname"/>
-
-                <label for="email">Email:</label>
-                <h:inputText id="email" h5:type="email" value="#{createUser.current.email}"/>
-                <h:message for="email"/>
-
-                <label for="password">Password</label>
-                <h:inputSecret id="password" value="#{createUser.password}"/>
-                <h:message for="password"/>
-
-                <h:commandButton value="Créer" action="#{createUser.save()}"/>
-            </h:panelGrid>
-            <h:messages globalOnly="true"/>
-
-        </h:form>
+             <h:outputLabel for="firstname">Lastname <span class="requis">*</span></h:outputLabel>
+             <h:inputText id="firstname" value="#{sessionTools.selectedUser.firstname}" required="true" size="20" maxlength="20" />
+             <h:message id="firstnameMessage" for="firstname" errorClass="erreur" />
+             <br />
+	     	
+	        <h:outputLabel for="motdepasse">Mot de passe <span class="requis">*</span></h:outputLabel>
+	        <h:inputSecret id="motdepasse" value="#{sessionTools.selectedUser.tempstr}" required="true" size="20" maxlength="20" />
+	        <h:message id="motDePasseMessage" for="motdepasse" errorClass="erreur" />
+	        <br />
+	
+	        <h:outputLabel for="confirmation">Confirmation du mot de passe <span class="requis">*</span></h:outputLabel>
+	        <h:inputSecret id="confirmation" value="#{sessionTools.selectedUser.password}" required="true" size="20" maxlength="20" />
+	        <h:message id="confirmationMessage" for="confirmation" errorClass="erreur" />
+	        <br />
+	
+	       
+	        
+	        <h:messages globalOnly="true" infoClass="info" />
+	
+	        <h:commandButton value="Modification" action="#{createUser.update()}" styleClass="sansLabel" />
+	        <br />
+          </fieldset>
+        </h:form> 	
     </h:body>
 </html>
+
 

@@ -71,6 +71,9 @@ public class SempicUser implements Serializable {
     
     @Transient
     private transient String password;
+
+    @Transient
+    private transient String tempstr;
     
     @OneToMany(mappedBy = "owner",cascade = CascadeType.REMOVE)
     private Set<SempicGroup> groups;
@@ -167,6 +170,14 @@ public class SempicUser implements Serializable {
         this.userType = userType;
     }
 
+    public String getTempstr() {
+        return tempstr;
+    }
+
+    public void setTempstr(String tempstr) {
+        this.tempstr = tempstr;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -198,4 +209,6 @@ public class SempicUser implements Serializable {
         return "SempicUser{id="+ id + ", "
                 + "lastname=" + lastname + ", firstname=" + firstname + ", email=" + email + '}';
     }
+
+  
 }

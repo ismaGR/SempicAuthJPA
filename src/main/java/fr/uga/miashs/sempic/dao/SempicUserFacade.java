@@ -7,6 +7,7 @@ package fr.uga.miashs.sempic.dao;
 
 import fr.uga.miashs.sempic.SempicModelException;
 import fr.uga.miashs.sempic.entities.SempicUser;
+
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
@@ -56,12 +57,12 @@ public class SempicUserFacade extends AbstractJpaFacade<Long,SempicUser> {
             .getResultList();
     }
     
-    /*public SempicUser login(String email, String password) {
-        Query q = getEntityManager().createNamedQuery("login");
-        q.setParameter("email", email);
-        q.setParameter("password", password);
-        return (SempicUser) q.getSingleResult();
-    }*/
+    // public SempicUser login(String email, String password)  throws SempicModelException{
+    //     Query q = getEntityManager().createNamedQuery("login");
+    //     q.setParameter("email", email);
+    //     q.setParameter("password", password);
+    //     return (SempicUser) q.getSingleResult();
+    // }
 
     
     
