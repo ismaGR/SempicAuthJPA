@@ -56,7 +56,7 @@ public class SempicGroup implements Serializable {
     @ManyToMany
     private Set<SempicUser> members;
 
-    /*
+    
     @ManyToMany(mappedBy="groups")
     private Set<Album> albums;
 
@@ -75,7 +75,7 @@ public class SempicGroup implements Serializable {
         this.albums=albums;
     }    
 
-*/
+
     public SempicGroup() {
         
     }
