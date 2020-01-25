@@ -34,7 +34,7 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
 @NamedQuery(
         name = "findUserAlbums",
-        query = "SELECT DISTINCT a FROM Album a WHERE a.owner.id=:owner.id"
+        query = "SELECT DISTINCT a FROM Album a WHERE a.owner=:owner"
 )
 //,
 //    
