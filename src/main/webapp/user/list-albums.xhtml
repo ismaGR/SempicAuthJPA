@@ -30,7 +30,17 @@
                 <h:button value="Add photo" outcome="create-photo">
                     <f:param name="albumId" value="#{album.albumId}"/>
                 </h:button>
+            </h:column>
+            <h:column>
+                <h:form>
+                <label>groups:</label>
+                <h:selectManyCheckbox id="groups" layout="pageDirection" value="#{createAlbum.current.groups}">
+                    <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.title}"/>
+                </h:selectManyCheckbox>            
+                <h:commandButton value="Créer" action="#{createAlbum.save()}"/>
+            </h:form>
             </h:column>            
+        
         </h:dataTable>
         <br/>
             

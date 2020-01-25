@@ -73,6 +73,18 @@ public class CreateAlbum implements Serializable{
     }
     
 
+    public String save(){
+        try {
+            //SessionTools st = new SessionTools();            
+            service.update(current);
+            //st.setCurrentAlbum(current);
+        } catch (SempicModelException ex) {
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+            return "failure";
+        }
+        
+        return "success";        
+    }
     public String create() {
         //System.out.println(current);
         
