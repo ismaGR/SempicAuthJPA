@@ -142,6 +142,18 @@
             <from-outcome>failure</from-outcome>
             <to-view-id>/user/create-album.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-action>#{createAlbum.save()}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/user/list-albums.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{createAlbum.save()}</from-action>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/user/list-albums.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>                
     </navigation-rule>
 
             <!-- Group creation result-->
