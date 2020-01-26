@@ -1,27 +1,21 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h5="http://xmlns.jcp.org/jsf/composite/components/html5"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
         <title>User page</title>
     </h:head>
     <h:body>
+           
+            <div class="bg-success"> <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}"/></div>
+            <h1> Bonjour user <h:outputText value="#{sessionTools.connectedUser.lastname}"/></h1>
+            <ui:insert name="menu" >
+                <ui:include src="menu.xhtml"/>
+            </ui:insert>                                
         
-        <div class="bg-success"> <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}"/></div>
-        <h1> Bonjour user <h:outputText value="#{sessionTools.connectedUser.lastname}"/></h1>
-        <p>Bienvenue à la page principale utilisateur</p>
-        
-    <br/>
-   
-        Voir les <h:link outcome="view-album">Album</h:link><br/>
-         Voir les <h:link outcome="view-group">Group</h:link><br/>
-         Voir les <h:link outcome="edit-user">Edit account</h:link><br/> 
-         <!-- <h:commandButton value="edit-user" action="#{createUser.allowUpdate()}"/> -->
-
-        <h:form>
-                <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
-        </h:form>
     </h:body>
 </html>
 

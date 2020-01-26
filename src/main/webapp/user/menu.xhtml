@@ -1,0 +1,49 @@
+
+<ui:composition class="sidenav"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>RabatTour - BackOffice</title>
+        <meta name="description" content="RabatTour - BackOffice" />
+        <meta name="author" content="AbdelAli Eramli" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="shortcut icon" href="img/favicon.ico" />
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="img/apple-touch-icon-57x57-precomposed.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png" />
+        <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic" />
+        <link rel="stylesheet" href="css/bootstrap.css" />
+        <link rel="stylesheet" href="css/plugins.css" />
+        <link rel="stylesheet" href="css/main.css" />
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ 
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ 
+        <script>if (!window.jQuery)
+                document.write(unescape('%3Cscript src="js/vendor/jquery-1.8.3.min.js"%3E%3C/script%3E'));</script>
+ 
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <!-- données pour le graphe de statistiques !-->
+    </head>
+    <p>Bienvenue au menu principale utilisateur</p>
+        
+    <br/>
+   
+        Aller vers les <h:link outcome="view-album">Album</h:link><br/>
+        Aller vers les <h:link outcome="view-group">Group</h:link><br/>
+        Aller vers les <h:link outcome="edit-user">Edit account</h:link><br/> 
+         <!-- <h:commandButton value="edit-user" action="#{createUser.allowUpdate()}"/> -->
+
+        <h:form>
+                <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+        </h:form>
+</ui:composition>
