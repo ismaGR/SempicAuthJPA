@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h5="http://xmlns.jcp.org/jsf/composite/components/html5">
     <h:head>
         <title>Album <h:outputText value="#{viewAlbum.current.title}"/></title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
@@ -44,6 +45,8 @@
     
     <br/>
     <h:button value="create album"  outcome="create-album"/>
+    <h:button value="list albums"  outcome="list-albums"/>
+    <h:button value="user view"  outcome="user-view"/>
     <h:messages globalOnly="true"/>
     	<br/> <br/>
 <!--          <h:form>
