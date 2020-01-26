@@ -33,19 +33,21 @@
             </h:column>
             <h:column>
                 Shared with:
-                <h:dataTable class="table" id="albums" value="#{album.groups}" var="group">
+                <h:dataTable class="table table-dark" id="albums" value="#{album.groups}" var="group">
                     <h:column>
                         <h:outputText value="#{group.name} "/>
                     </h:column>
                 </h:dataTable>
-                <h:form>
-                    <input type="hidden" name="albumId" binding="#{createAlbum.albumId}" value="#{album.albumId}" />
-                    <label>groups:</label>
-                    <h:selectManyCheckbox id="groups" layout="pageDirection" value="#{createAlbum.current.groups}">
-                        <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.name}"/>
-                    </h:selectManyCheckbox>            
-                    <h:commandButton value="partager" action="#{createAlbum.save()}"/>
-            </h:form>
+                <h:dataTable class="table table-striped">
+                    <h:form>
+                        <input type="hidden" name="albumId" binding="#{createAlbum.albumId}" value="#{album.albumId}" />
+                        <label>groups:</label>
+                        <h:selectManyCheckbox id="groups" layout="pageDirection" value="#{createAlbum.current.groups}">
+                            <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.name}"/>
+                        </h:selectManyCheckbox>            
+                        <h:commandButton value="partager" action="#{createAlbum.save()}"/>
+                </h:form>    
+                </h:dataTable>
             </h:column>            
         </h:dataTable>
         <br/>
