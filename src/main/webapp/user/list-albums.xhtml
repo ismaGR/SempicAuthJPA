@@ -45,7 +45,7 @@
         
     </h:head>
     <h:body>
-        <div class="bg-success"> <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}"/></div>
+        <div> <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}"/></div>
         <h:dataTable class="table" id="albums" value="#{sessionTools.userAlbums}" var="album">
 
             <h:column>
@@ -72,13 +72,12 @@
                                     <h:graphicImage value="#{photo.thumbpath}" />
                                 </a>
                                 <h:form>
-                                    <input type="hidden" name="delPhoto" binding="#{createAlbum.photoId}" value="#{photo.photoId}" />         
+                                    <input type="hidden" name="delPhoto" value="#{photo.photoId}" />         
                                     <h:commandButton value="supprimer" action="#{createAlbum.deletePhoto()}"/>
                                 </h:form>                                    
                               </div>
                         </h:column>
-                    </h:dataTable>
-                
+                    </h:dataTable>            
             </h:column>
             <h:column>
                 <h:button value="Add photo" outcome="create-photo">
