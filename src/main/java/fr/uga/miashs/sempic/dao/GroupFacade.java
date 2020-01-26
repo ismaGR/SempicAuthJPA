@@ -8,6 +8,7 @@ package fr.uga.miashs.sempic.dao;
 
 import fr.uga.miashs.sempic.entities.SempicGroup;
 import fr.uga.miashs.sempic.entities.SempicUser;
+import fr.uga.miashs.sempic.entities.Album;;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -30,8 +31,9 @@ public class GroupFacade extends AbstractJpaFacade<Long,SempicGroup>{
         q.setParameter("owner", owner);
         return q.getResultList();
     } 
-    
-    
+  
+        
+
     
     public void addMember(long groupId, long userId) {
         Query q = getEntityManager().createNativeQuery("INSERT INTO SEMPICGROUP_SEMPICUSER(MEMBERS_ID,MEMBEROF_ID) VALUES (?1,?2)");

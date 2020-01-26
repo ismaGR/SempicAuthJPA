@@ -28,6 +28,6 @@ public class AlbumFacade extends AbstractJpaFacade<Long, Album> {
         return q.getResultList();
     } 
     
-   
+    
     
 }
