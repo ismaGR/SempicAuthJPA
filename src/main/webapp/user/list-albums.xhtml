@@ -44,7 +44,7 @@
                     <h:selectManyCheckbox id="groups" layout="pageDirection" value="#{createAlbum.current.groups}">
                         <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.name}"/>
                     </h:selectManyCheckbox>            
-                    <h:commandButton value="Créer" action="#{createAlbum.save()}"/>
+                    <h:commandButton value="partager" action="#{createAlbum.save()}"/>
             </h:form>
             </h:column>            
         </h:dataTable>

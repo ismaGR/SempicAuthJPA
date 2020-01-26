@@ -102,10 +102,6 @@
 	        </navigation-case>
     </navigation-rule>
     
-    
-    
-      
-    
 
     <!--  user update action result-->
 
@@ -153,7 +149,9 @@
             <from-outcome>failure</from-outcome>
             <to-view-id>/user/list-albums.xhtml</to-view-id>
             <redirect/>
-        </navigation-case>                
+        </navigation-case>      
+          
+
     </navigation-rule>
 
             <!-- Group creation result-->
