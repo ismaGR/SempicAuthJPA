@@ -44,9 +44,9 @@
          
     
     <br/>
-    <h:button value="create album"  outcome="create-album"/>
-    <h:button value="list albums"  outcome="list-albums"/>
-    <h:button value="user view"  outcome="user-view"/>
+    <ui:insert name="menu" >
+        <ui:include src="menu.xhtml"/>
+    </ui:insert> 
     <h:messages globalOnly="true"/>
     	<br/> <br/>
 <!--          <h:form>
