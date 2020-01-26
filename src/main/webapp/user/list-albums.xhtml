@@ -86,9 +86,10 @@
                 </h:button>
             </h:column>
             <h:column>
-                Shared with:
-                <h:dataTable class="table table-dark" id="albums" value="#{album.groups}" var="group">
+                
+                <h:dataTable class="table table-dark" id="albums" value="#{album.groups}" rendered="#{not empty album.groups}" var="group">
                     <h:column>
+                        <b>Shared with:</b>
                         <h:outputText value="#{group.name} "/>
                     </h:column>
                 </h:dataTable>
