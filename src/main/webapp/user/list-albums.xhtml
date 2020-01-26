@@ -46,13 +46,8 @@
         
     </h:head>   
     <h:body>
-<<<<<<< HEAD
         <div> <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}"/></div>
-=======
-        
-   
-     <tr> 
->>>>>>> 8ab00c8ec431ea43e13bad24b1bb433793c9a068
+
         <h:dataTable class="table" id="albums" value="#{sessionTools.userAlbums}" var="album">
 
             <h:column>
@@ -92,9 +87,10 @@
                 </h:button>
             </h:column>
             <h:column>
-                Shared with:
-                <h:dataTable class="table table-dark" id="albums" value="#{album.groups}" var="group">
+                
+                <h:dataTable class="table table-dark" id="albums" value="#{album.groups}" rendered="#{not empty album.groups}" var="group">
                     <h:column>
+                        <b>Shared with:</b>
                         <h:outputText value="#{group.name} "/>
                     </h:column>
                 </h:dataTable>
