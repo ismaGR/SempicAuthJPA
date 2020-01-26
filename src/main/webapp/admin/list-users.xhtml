@@ -51,6 +51,12 @@
                 </h:button>
             </h:column>
 
+            <h:column>
+                    <h:commandButton value="delete user" action="#{createUser.delete()}"/>
+                    <f:param name="userId" value="#{user.id}"/>
+            </h:column>
+
+          
 
         </h:dataTable>
 
