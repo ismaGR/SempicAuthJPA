@@ -45,7 +45,7 @@
         
     </h:head>
     <h:body>
-
+        <div class="bg-success"> <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}"/></div>
         <h:dataTable class="table" id="albums" value="#{sessionTools.userAlbums}" var="album">
 
             <h:column>
@@ -71,6 +71,10 @@
                                 <a href="#"  data-toggle="popover" data-img="/SempicJPA-1.1#{photo.path}" title="Image Overview" >                                
                                     <h:graphicImage value="#{photo.thumbpath}" />
                                 </a>
+                                <h:form>
+                                    <input type="hidden" name="delPhoto" binding="#{createAlbum.photoId}" value="#{photo.photoId}" />         
+                                    <h:commandButton value="supprimer" action="#{createAlbum.deletePhoto()}"/>
+                                </h:form>                                    
                               </div>
                         </h:column>
                     </h:dataTable>
@@ -88,23 +92,25 @@
                         <h:outputText value="#{group.name} "/>
                     </h:column>
                 </h:dataTable>
-                <h:dataTable class="table table-striped">
-                    <h:form>
-                        <input type="hidden" name="albumId" binding="#{createAlbum.albumId}" value="#{album.albumId}" />
-                        <label>groups:</label>
-                        <h:selectManyCheckbox id="groups" layout="pageDirection" value="#{createAlbum.current.groups}">
-                            <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.name}"/>
-                        </h:selectManyCheckbox>            
-                        <h:commandButton value="partager" action="#{createAlbum.save()}"/>
+                <h:form>
+                    <input type="hidden" name="albumId" binding="#{createAlbum.albumId}" value="#{album.albumId}" />
+                    <label>groups:</label>
+                    <h:selectManyCheckbox id="groups" layout="pageDirection" value="#{createAlbum.current.groups}">
+                        <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.name}"/>
+                    </h:selectManyCheckbox>            
+                    <h:commandButton value="partager" action="#{createAlbum.save()}"/>
                 </h:form>    
-                </h:dataTable>
+
             </h:column>            
         </h:dataTable>
         <br/>
-            
+        
         <h:button value="create album"  outcome="create-album"/>
         <h:button value="view album"  outcome="view-album"/>
         <h:button value="user view"  outcome="user-view"/>
+
+
+
     </h:body>
     <script>
         $(document).ready(function(){
@@ -118,6 +124,9 @@
                   },
                   title: 'Toolbox'
             }) 
+
+
+
         });    
             </script>
 </html>

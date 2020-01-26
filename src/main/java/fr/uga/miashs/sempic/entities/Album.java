@@ -79,6 +79,10 @@ public class Album implements Serializable{
         return albumId;
     }
 
+    public void setPhotos(Set<Photo> photos){
+        this.setPhotos(photos);
+    }
+
     public void setAlbumId(Long id){
         this.albumId=id;
     }

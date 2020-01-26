@@ -340,15 +340,6 @@ public class SessionTools implements Serializable {
 
 
 
-   public String getStringAlbumGroupsIds(){
-        String strIds="var groups = []; ";
-        for(Album album : this.userAlbums){
-            System.out.println(album);
-            for(SempicGroup group: album.getGroups()){
-                strIds += "groups[]="+group.getId()+"; ";
-            }
-         }        
-         return strIds;
-    } 
+
 
 }

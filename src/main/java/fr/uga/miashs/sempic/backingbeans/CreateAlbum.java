@@ -5,19 +5,24 @@
  */
 package fr.uga.miashs.sempic.backingbeans;
 
+import fr.uga.miashs.sempic.SempicException;
 import fr.uga.miashs.sempic.SempicModelException;
 import fr.uga.miashs.sempic.dao.AlbumFacade;
+import fr.uga.miashs.sempic.dao.PhotoFacade;
+import fr.uga.miashs.sempic.dao.PhotoStorage;
 import fr.uga.miashs.sempic.entities.Album;
 import fr.uga.miashs.sempic.entities.Photo;
 import fr.uga.miashs.sempic.entities.SempicGroup;
 import fr.uga.miashs.sempic.entities.SempicUser;
 import fr.uga.miashs.sempic.qualifiers.Selected;
 import java.io.Serializable;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -29,7 +34,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-
+import java.nio.file.Path;
 
 /**
  *
@@ -47,11 +52,24 @@ public class CreateAlbum implements Serializable{
 
     @Inject
     private AlbumFacade service;
+    @Inject
+    private PhotoFacade servicePhoto;
+    @Inject
+    private PhotoStorage photoStorage;
 
     @Inject
     @Selected
     private SempicUser selectedUser;
 
+
+    private Long photoId;
+
+    public Long getPhotoId(){
+        return albumId;
+    }
+    public void setPhotoId(Long albumId){
+        this.albumId = albumId;
+    }    
 
     private Long albumId;
 
@@ -100,11 +118,14 @@ public class CreateAlbum implements Serializable{
             Logger.getLogger(SessionTools.class.getName()).log(Level.INFO, "albumIdRequest: "+albumIdRequest+" requestParams"+requestParams, "albumIdRequest: "+albumIdRequest+" requestParams"+requestParams);
             Logger.getLogger(SessionTools.class.getName()).log(Level.INFO, "album: "+album, "album: "+album);
             if(album != null && service.update(album) instanceof Album){
+                
+                selectedUser.setTempstr("Album partagé");
                 return "success";
             }
             //st.setCurrentAlbum(current);
         } catch (SempicModelException ex) {
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+           selectedUser.setTempstr("Le partage de l'album a échoué");
             return "failure";
         }
         
@@ -125,5 +146,34 @@ public class CreateAlbum implements Serializable{
         return "success";
     }
 
+    public String deletePhoto(){
+        try {
+            Map<String,String> requestParams = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+            String photoIdRequest=requestParams.get("delPhoto");            
+            //String albumIdRequest = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("albumId");
+            System.out.println("photoIdRequest id from request");
+            System.out.println(photoIdRequest);
+            photoId = Long.parseLong(photoIdRequest);
+            Photo photo=servicePhoto.read(photoId);
+            Album album = photo.getAlbum();
+            Set<Photo> photos =  album.getPhotos();
+            photos.remove(photo);
+            album.setPhotos(photos);
+            photo.setAlbum(null);
+            servicePhoto.update(photo);
+            service.update(album);
+            Logger.getLogger(SessionTools.class.getName()).log(Level.INFO, "photo to del: "+photo, "photo: "+photo);
+            photoStorage.deletePicture(photoStorage.getPicturePath(Paths.get(photo.getAlbum().getAlbumId()+"", photo.getPhotoId()+"")));
+            selectedUser.setTempstr("Le photo a été supprimé");
+            return "success";
+        } catch (SempicException ex){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+            selectedUser.setTempstr("Echec de la suppression");            
+        } catch (SempicModelException e) {
+            // TODO Auto-generated catch block
+            selectedUser.setTempstr("Echec de la suppression");  
+        }
+        return "failure";
+    }
     
 }
