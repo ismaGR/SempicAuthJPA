@@ -10,6 +10,13 @@
     </h:head>
     <h:body>
 
+        <h:form>
+            
+            <ui:insert name="menu">
+                <ui:include src="menu-admin.xhtml"/>
+            </ui:insert>       
+            </h:form>
+
         <h:dataTable class="table table-dark" id="users" value="#{listUsers.dataModel}" var="user">
 
             <h:column>
@@ -52,17 +59,16 @@
             </h:column>
 
             <h:column>
+                <h:form>
+                    <input type="hidden" name="delUser"   value="#{user.id}" />
                     <h:commandButton value="delete user" action="#{createUser.delete()}"/>
                     <f:param name="userId" value="#{user.id}"/>
-            </h:column>
-
-          
-
+                  
+                </h:form>
+            </h:column>          
         </h:dataTable>
-
+       
         <h:link value="Add a new user link"  outcome="create-user"/>
-
-
     </h:body>
 </html>
 

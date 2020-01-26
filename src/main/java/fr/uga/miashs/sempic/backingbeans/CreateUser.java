@@ -12,6 +12,7 @@ import fr.uga.miashs.sempic.entities.SempicUser;
 import fr.uga.miashs.sempic.qualifiers.Selected;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -122,7 +123,7 @@ public class CreateUser implements Serializable {
             if(selectedUser.getTempstr().equals(selectedUser.getPassword())){
            userDao.update(selectedUser); selectedUser.setTempstr("Utilisateur Modifié avec succes");
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Utilisateur Modifié avec succes"));
-           res="sucess";
+           res="success";
             }else { 
                 res="failure";
                 selectedUser.setTempstr("mot de passe différent !");
@@ -138,15 +139,23 @@ public class CreateUser implements Serializable {
     }
 
     public String delete()throws Exception{
-        String res="failure";
-
+        String res="failure"; Long uId = null;
+        Map<String,String> requestParams = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String userIdRequest=requestParams.get("delUser");           
         try {
-            
-                userDao.delete(current);
-                res = "succes";
+                 uId = Long.parseLong(userIdRequest);
+        
+                userDao.delete(userDao.read(uId));
+                selectedUser.setTempstr("Succes de la suppression de l'user");
+                res = "success";
              
         }catch (SempicModelException ex) { res= "failure";
-           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));       
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+           selectedUser.setTempstr("Echec de la suppression (SempicModelException)");         
+        }
+        catch(NumberFormatException nfx){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(nfx.getMessage()));
+            selectedUser.setTempstr("Echec de la suppression due a l'id user (NumberFormatException)");   
         }
         return res;
     }

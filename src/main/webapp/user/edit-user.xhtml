@@ -1,7 +1,8 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
- xmlns:h="http://java.sun.com/jsf/html"> 
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:ui="http://xmlns.jcp.org/jsf/facelets"> 
     <h:head>
         <meta charset="utf-8" />
         <title>update</title>
@@ -41,6 +42,9 @@
 	        <br />
           </fieldset>
         </h:form> 	
+        <ui:insert name="menu" >
+            <ui:include src="menu.xhtml"/>
+        </ui:insert> 
     </h:body>
 </html>
 

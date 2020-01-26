@@ -39,6 +39,9 @@
      <h:button value="user view"  outcome="user-view"/>
      
      <br/>
+     <ui:insert name="menu" >
+            <ui:include src="menu.xhtml"/>
+        </ui:insert> 
      <br/>
         <h:form>
                 <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>

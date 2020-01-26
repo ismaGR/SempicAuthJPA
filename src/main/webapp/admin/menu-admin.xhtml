@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+  <div>
+    <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}">  </h:outputText>
+    
+  </div>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link"  href="list-albums.xhtml">list-albums</a>
+      <a class="nav-link"  href="list-users.xhtml">list-users</a>
+    </li>
+  </ul>
+
+         <h:form>
+
+      
+                <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+        </h:form>
+</ui:composition>
