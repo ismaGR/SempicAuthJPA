@@ -34,7 +34,9 @@
             <h:column>
                 Shared with:
                 <h:dataTable class="table" id="albums" value="#{album.groups}" var="group">
-                    <h:outputText value="#{group.name} "/>
+                    <h:column>
+                        <h:outputText value="#{group.name} "/>
+                    </h:column>
                 </h:dataTable>
                 <h:form>
                     <input type="hidden" name="albumId" binding="#{createAlbum.albumId}" value="#{album.albumId}" />
