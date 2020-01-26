@@ -24,13 +24,17 @@
                 <h:outputText value="#{album.title}"/>
             </h:column>
             
-             <!--  <h:column>
+            <h:column>
                 <f:facet name="header">
-                    <h:outputText value="group name" />
+                    <h:outputText value="group de partage" />
                 </f:facet>
 
-                <h:outputText value="#{sessionTools.getUserAlbums()}"/>
-            </h:column> -->
+                <ui:repeat value="#{album.groups}" var="g">
+                    <h:outputText value="#{g.name} "/>
+                </ui:repeat>
+
+                
+            </h:column> 
 
            
            
