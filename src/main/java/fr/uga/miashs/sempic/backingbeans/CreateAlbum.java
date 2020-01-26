@@ -9,6 +9,7 @@ import fr.uga.miashs.sempic.SempicModelException;
 import fr.uga.miashs.sempic.dao.AlbumFacade;
 import fr.uga.miashs.sempic.entities.Album;
 import fr.uga.miashs.sempic.entities.Photo;
+import fr.uga.miashs.sempic.entities.SempicGroup;
 import fr.uga.miashs.sempic.entities.SempicUser;
 import fr.uga.miashs.sempic.qualifiers.Selected;
 import java.io.Serializable;
@@ -84,6 +85,7 @@ public class CreateAlbum implements Serializable{
         this.current = current;
     }
     
+
 
     public String save(){
         try {

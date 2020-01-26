@@ -32,25 +32,37 @@
                 </h:button>
             </h:column>
             <h:column>
-                Shared with:
-                <h:dataTable class="table" id="albums" value="#{album.groups}" var="group">
+                <b>Shared with:</b>
+                <h:dataTable class="table table-dark" id="albums" value="#{album.groups}" var="group">
                     <h:column>
                         <h:outputText value="#{group.name} "/>
                     </h:column>
                 </h:dataTable>
-                <h:form>
-                    <input type="hidden" name="albumId" binding="#{createAlbum.albumId}" value="#{album.albumId}" />
-                    <label>groups:</label>
-                    <h:selectManyCheckbox id="groups" layout="pageDirection" value="#{createAlbum.current.groups}">
-                        <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.name}"/>
-                    </h:selectManyCheckbox>            
-                    <h:commandButton value="Créer" action="#{createAlbum.save()}"/>
-            </h:form>
+                <h:table class="table table-striped">
+
+                <h:column>
+
+                    <h:form>
+                        <input type="hidden" name="albumId" binding="#{createAlbum.albumId}" value="#{album.albumId}" />
+                        <input type="hidden" name="album" binding="#{createAlbum.current}" value="#{album}" />
+                        <label>groups:</label>
+                        <h:selectManyCheckbox id="groups" layout="pageDirection" value="#{createAlbum.current.groups}">
+                            <f:selectItems value="#{createGroup.groups}"  var="u" id="#{u.id}" itemLabel="#{u.name}"/>
+                        </h:selectManyCheckbox>            
+                        <h:commandButton value="Créer" action="#{createAlbum.save()}"/>
+                    </h:form>                
+                </h:column>
+                </h:table>
+
             </h:column>            
         </h:dataTable>
         <br/>
             
         <h:button value="create album"  outcome="create-album"/>
+        <script><h:outputText value="#{sessionTools.getStringAlbumGroupsIds()} "/></script>
+            
+
     </h:body>
+
 </html>
 
