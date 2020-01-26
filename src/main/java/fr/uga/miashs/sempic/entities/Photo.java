@@ -34,7 +34,7 @@ public class Photo implements Serializable {
     private long photoId;
     
     static String WEBAPI = "/webapi/picture";
-    static String THUMB_WIDTH = "250";
+    public static final String THUMB_WIDTH = "250";
 
     @NotNull
     @ManyToOne

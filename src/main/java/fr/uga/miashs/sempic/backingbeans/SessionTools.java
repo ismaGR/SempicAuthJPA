@@ -67,6 +67,16 @@ public class SessionTools implements Serializable {
     
     private Long albumId;
 
+  
+
+    private List<SempicGroup> userGroup;
+    
+    private String currentView;
+   
+	private String previousView;
+    private Map<String,String> currentParams;
+    private Map<String,String> previousParams;
+
     public Long getAlbumId(){
         return this.albumId;
     }
@@ -82,14 +92,6 @@ public class SessionTools implements Serializable {
     public void setAlbumId(Long albumId){
         this.albumId = albumId;
     }
-
-    private List<SempicGroup> userGroup;
-    
-    private String currentView;
-   
-	private String previousView;
-    private Map<String,String> currentParams;
-    private Map<String,String> previousParams;
     /**
      * Creates a new instance of Login
      */
@@ -340,15 +342,6 @@ public class SessionTools implements Serializable {
 
 
 
-   public String getStringAlbumGroupsIds(){
-        String strIds="var groups = []; ";
-        for(Album album : this.userAlbums){
-            System.out.println(album);
-            for(SempicGroup group: album.getGroups()){
-                strIds += "groups[]="+group.getId()+"; ";
-            }
-         }        
-         return strIds;
-    } 
+
 
 }

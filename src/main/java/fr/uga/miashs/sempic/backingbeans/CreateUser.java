@@ -141,12 +141,13 @@ public class CreateUser implements Serializable {
         String res="failure";
 
         try {
-            if(st.isAdmin()) { 
-            userDao.delete(current);
-            res = "succes";
-        } catch (SempicModelException ex) { res= "failure";
-           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
-               
+            
+                userDao.delete(current);
+                res = "succes";
+             
+        }catch (SempicModelException ex) { res= "failure";
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));       
+        }
         return res;
     }
 

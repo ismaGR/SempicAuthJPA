@@ -171,7 +171,10 @@ public class SempicUser implements Serializable {
     }
 
     public String getTempstr() {
-        return tempstr;
+        String msg= tempstr;
+
+        tempstr = "";
+        return msg;
     }
 
     public void setTempstr(String tempstr) {

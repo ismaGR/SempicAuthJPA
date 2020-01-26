@@ -46,10 +46,8 @@
         
     </h:head>   
     <h:body>
-        
-   
-     <tr> 
-        <h:dataTable class="table" id="albums" value="#{sessionTools.userAlbums}" var="album">
+        <div> <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}"/></div>
+  <h:dataTable class="table" id="albums" value="#{sessionTools.userAlbums}" var="album">
 
             <h:column>
                 <f:facet name="header">
@@ -74,10 +72,13 @@
                                 <a href="#"  data-toggle="popover" data-img="/SempicJPA-1.1#{photo.path}" title="Image Overview" >                                
                                     <h:graphicImage value="#{photo.thumbpath}" />
                                 </a>
+                                <h:form>
+                                    <input type="hidden" name="delPhoto" value="#{photo.photoId}" />         
+                                    <h:commandButton value="supprimer" action="#{createAlbum.deletePhoto()}"/>
+                                </h:form>                                    
                               </div>
                         </h:column>
-                    </h:dataTable>
-                
+                    </h:dataTable>            
             </h:column>
             <h:column>
                 <h:button value="Add photo" outcome="create-photo">
@@ -86,7 +87,7 @@
             </h:column>
             <h:column>
                 Shared with:
-                <h:dataTable class="table" id="albums" value="#{album.groups}" var="group">
+                <h:dataTable class="table table-dark" id="albums" value="#{album.groups}" var="group">
                     <h:column>
                         <h:outputText value="#{group.name} "/>
                     </h:column>
@@ -98,15 +99,17 @@
                         <f:selectItems value="#{createGroup.groups}"  var="u" itemLabel="#{u.name}"/>
                     </h:selectManyCheckbox>            
                     <h:commandButton value="partager" action="#{createAlbum.save()}"/>
-            </h:form>
+                </h:form>    
+
             </h:column>            
         </h:dataTable>
         <br/>
-    </tr>    
-            
         <h:button value="create album"  outcome="create-album"/>
         <h:button value="view album"  outcome="view-album"/>
         <h:button value="user view"  outcome="user-view"/>
+
+
+
     </h:body>
     <script>
         $(document).ready(function(){
@@ -120,6 +123,9 @@
                   },
                   title: 'Toolbox'
             }) 
+
+
+
         });    
             </script>
 </html>

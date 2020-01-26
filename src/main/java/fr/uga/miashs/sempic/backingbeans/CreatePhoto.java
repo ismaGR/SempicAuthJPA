@@ -108,6 +108,7 @@ public class CreatePhoto implements Serializable {
 
     private Part file;
           
+
     private static final Map <String, String> mimeTypes; // static - one obj for all
     
     static {
@@ -119,6 +120,8 @@ public class CreatePhoto implements Serializable {
 
     @Inject
     private PhotoFacade service;
+    @Inject
+    private AlbumFacade serviceAlbum;
     
     public CreatePhoto() {
         
@@ -189,6 +192,22 @@ public class CreatePhoto implements Serializable {
     }    
     public String create() {
         Album album = this.current.getAlbum();
+
+        if(album == null){
+            Long aId = null;
+            Map<String,String> requestParams = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+            String albumIdRequest=requestParams.get("albumId");              
+            if(albumIdRequest != null){
+                aId = Long.parseLong(albumIdRequest);
+            }
+
+            if(aId == null){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("albumId not found"));
+                return "failure";
+            }        
+            
+            album=serviceAlbum.read(aId);
+        }
         Logger.getLogger(Album.class.getName()).log(Level.INFO, album+"", album);
         
 
@@ -221,4 +240,6 @@ public class CreatePhoto implements Serializable {
             return "success";
         }
     }
+
+    
 }
