@@ -6,16 +6,20 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+        <ui:insert name="menu" >
+            <ui:include src="menu.xhtml"/>
+        </ui:insert> 
         <title>User page</title>
     </h:head>
     <h:body>
-           
+      
             <div class="bg-success"> <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}"/></div>
             <h1> Bonjour user <h:outputText value="#{sessionTools.connectedUser.lastname}"/></h1>
-            <ui:insert name="menu" >
-                <ui:include src="menu.xhtml"/>
-            </ui:insert>                                
+                                        
         
     </h:body>
+    <h:form>
+        <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+</h:form>
 </html>
 

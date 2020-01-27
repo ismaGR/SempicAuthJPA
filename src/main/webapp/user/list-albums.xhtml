@@ -48,9 +48,13 @@
 }
             </style>
 
-        
+<ui:insert name="menu" >
+    <ui:include src="menu.xhtml"/>
+</ui:insert> 
     </h:head>   
     <h:body>
+
+     
         
   <h:dataTable class="table" id="albums" value="#{sessionTools.userAlbums}" var="album">
 
@@ -110,9 +114,7 @@
             </h:column>            
         </h:dataTable>
         <br/>
-        <ui:insert name="menu" >
-            <ui:include src="menu.xhtml"/>
-        </ui:insert> 
+       
 
         <script>
             $(document).ready(function(){
@@ -134,5 +136,7 @@
 
     </h:body>
     
+        <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+
 </html>
 

@@ -8,12 +8,17 @@
     <h:head>
         <title>Album <h:outputText value="#{viewAlbum.current.title}"/></title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>                
-    </h:head>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+
+            
+            </h:head>
     <h:body>
-        
+        <ui:insert name="header" >
+            <ui:include src="headers.xhtml"/>
+        </ui:insert> 
         <h1>Albums pour l'utilisateur <h:outputText value="#{sessionTools.connectedUser.lastname}"/> </h1>
-        
+
+    <h:messages globalOnly="true"/>
         <h:dataTable class="table table-dark" id="groups" value="#{sessionTools.getUserAlbums()}" var="album"> 
             
 
@@ -44,20 +49,13 @@
          
     
     <br/>
-    <ui:insert name="menu" >
-        <ui:include src="menu.xhtml"/>
-    </ui:insert> 
-    <h:messages globalOnly="true"/>
-    	<br/> <br/>
-<!--          <h:form>
-        <h:commandButton value="back" action="#{sessionTools.getPreviousView()}"/>
-       </h:form>-->
-        
-        <br/>
-            
-        <h:form>
-                <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
-        </h:form>
+    
+    	
+    <h:form>
+        <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+</h:form>
+       
+       
     </h:body>
 </html>
 

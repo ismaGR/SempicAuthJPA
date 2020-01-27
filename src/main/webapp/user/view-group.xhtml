@@ -6,12 +6,20 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Groupes pour l'utilisateur <h:outputText value="#{viewGroup.current.lastname}"/></title>
+      
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>                
+              <ui:insert name="header" >
+                <ui:include src="headers.xhtml"/>
+        </ui:insert> 
     </h:head>
     <h:body>
         
         <h1>Groupes pour l'utilisateur <h:outputText value="#{sessionTools.connectedUser.lastname}"/></h1>
+
+        <ui:insert name="menu" >
+            <ui:include src="menu.xhtml"/>
+    </ui:insert> 
            <h:dataTable class="table table-dark" id="groups" value="#{sessionTools.getUserGroup()}" var="group"> 
             
 
@@ -36,20 +44,14 @@
          <h:button value="create group"  outcome="create-group"/>
      <h:messages globalOnly="true"/>
 
-     <h:button value="user view"  outcome="user-view"/>
+
      
-     <br/>
-     <ui:insert name="menu" >
-            <ui:include src="menu.xhtml"/>
-        </ui:insert> 
-     <br/>
-        <h:form>
-                <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
-                
-               
-        </h:form>
+   
+       
     </h:body>
-        
+    <h:form>
+        <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+</h:form>
       
 </html>
 

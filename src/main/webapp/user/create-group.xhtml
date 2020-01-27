@@ -11,9 +11,15 @@
     <h:head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>        
         <title>Création d'un groupe</title>
+        <ui:insert name="header" >
+            <ui:include src="headers.xhtml"/>
+        </ui:insert> 
     </h:head>
 
     <h:body>
+        <ui:insert name="menu" >
+            <ui:include src="menu.xhtml"/>
+        </ui:insert> 
         <h:form>
             <h:panelGrid columns = "3">
                 <label for="lastname">Nom:</label>
@@ -31,9 +37,10 @@
             <h:messages globalOnly="true"/>
 
         </h:form>
-        <ui:insert name="menu" >
-            <ui:include src="menu.xhtml"/>
-        </ui:insert> 
+       
     </h:body>
+    <h:form>
+        <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+</h:form>
 </html>
 

@@ -41,9 +41,13 @@
     min-width: 800px;
 }
             </style>
+            <ui:insert name="menu" >
+                <ui:include src="menu.xhtml"/>
+            </ui:insert> 
     </h:head>
 
     <h:body>
+        
     
         <h:dataTable class="table" id="albums" value="#{sessionTools.userAlbums}" var="album">
 
@@ -73,10 +77,11 @@
         </h:dataTable>            
         <br/>
             
-        <ui:insert name="menu" >
-            <ui:include src="menu.xhtml"/>
-        </ui:insert> 
+       
     </h:body>
+    
+        <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+
     <script>
 $(document).ready(function(){
 	 $('[data-toggle="popover"]').popover({

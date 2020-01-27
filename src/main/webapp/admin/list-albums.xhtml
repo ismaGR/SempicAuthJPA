@@ -9,7 +9,9 @@
         <title>Liste des albums</title>
     </h:head>
     <h:body>
-
+        <ui:insert name="header">
+            <ui:include src="headers.xhtml"/>
+        </ui:insert>   
         <h:dataTable class="table table-dark" id="albums" value="#{listAlbums.dataModel}" var="album">
 
             <h:column>

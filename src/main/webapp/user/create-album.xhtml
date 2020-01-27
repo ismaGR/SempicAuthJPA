@@ -13,7 +13,9 @@
             </ui:insert> 
      </h:head>
     <h:body>
-
+        <ui:insert name="menu" >
+            <ui:include src="menu.xhtml"/>
+        </ui:insert> 
 
         <h:form>
             <h:panelGrid columns = "3">
@@ -25,9 +27,11 @@
             <h:messages globalOnly="true"/>
 
         </h:form>
-        <ui:insert name="menu" >
-            <ui:include src="menu.xhtml"/>
-        </ui:insert> 
+        
     </h:body>
+
+    <h:form>
+        <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+</h:form>
 </html>
 

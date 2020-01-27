@@ -4,26 +4,52 @@
   xmlns:h="http://xmlns.jcp.org/jsf/html"
   xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
-        <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                  <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Sempic Application</a>
-                  </div>
-                  <ul class="nav navbar-nav">
-                        <li><h:button outcome="edit-user" value="Modification compte"/></li>
-                        <li><h:button outcome="view-group" value="Group"/></li>
-                        <li><h:button outcome="view-album" value="Album"/></li>
-                        <li><h:button outcome="create-user" value="Create a user"/></li>
-                        <li><h:button outcome="list-users" value="List of users"/></li>
-                  </ul>
-                </div>
+       
+
+        <nav class="navbar navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+ 
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                                Album
+                              </a>
+                                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="create-album.xhtml">Create album</a>
+                                    <a class="dropdown-item" href="list-albums.xhtml">List of albums</a>               
+                                  </div>
+                          </li>
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Group
+                              </a>
+                                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="create-group.xhtml">Create a group</a>
+                                    <a class="dropdown-item" href="view-group.xhtml">View of groups</a>                  
+                                  </div>
+                          </li>
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                User
+                              </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                  <a class="dropdown-item" href="../create-user.xhtml">Create a user</a>
+                                  <a class="dropdown-item" href="edit-user.xhtml">edit users</a>  
+                                  <a class="dropdown-item" href="user-view.xhtml">user view</a>                  
+                                </div>
+                          </li>
+          </div>
+          
+        
         </nav>
+
          <!-- <h:commandButton value="edit-user" action="#{createUser.allowUpdate()}"/> -->
-         <div>
+         
             <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}">  </h:outputText>
             
-          </div>
-        <h:form>
-                <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
-        </h:form>
+          
+      
 </ui:composition>

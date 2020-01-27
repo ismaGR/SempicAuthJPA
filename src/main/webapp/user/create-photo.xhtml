@@ -11,9 +11,12 @@
     <h:head>
         <title>Création d'un album</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>                
+        
     </h:head>
     <h:body>
-
+        <ui:insert name="menu" >
+            <ui:include src="menu.xhtml"/>
+        </ui:insert> 
         <h:form method="POST"  enctype="multipart/form-data">
             <h:panelGrid columns = "2">
 
@@ -26,9 +29,10 @@
 
             <h:messages globalOnly="true"/>
         </h:form>
-        <ui:insert name="menu" >
-            <ui:include src="menu.xhtml"/>
-        </ui:insert> 
+        
     </h:body>
+    <h:form>
+        <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
+</h:form>
 </html>
 
