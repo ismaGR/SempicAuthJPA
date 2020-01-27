@@ -4,19 +4,53 @@
   xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
   <div>
-    <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}">  </h:outputText>
-    
+    <h:outputText value="#{sessionTools.connectedUser.tempstr}" renderer="#{not empty sessionTools.selectuser.tempstr}">  </h:outputText>   
   </div>
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link"  href="list-albums.xhtml">list-albums</a>
-      <a class="nav-link"  href="list-users.xhtml">list-users</a>
-    </li>
-  </ul>
+ 
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Sempic Main</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Photo
+                        </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="nav-link"  href="/SempicJPA-1.1/faces/user/list-photos.xhtml">list-photos</a>               
+                          </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                        Album
+                      </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/SempicJPA-1.1/faces/user/create-album.xhtml">Create album</a>
+                            <a class="dropdown-item" href="/SempicJPA-1.1/faces/user/list-albums.xhtml">List of albums</a>               
+                          </div>
+                    </li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Group
+                      </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/SempicJPA-1.1/faces/user/create-group.xhtml">Create a group</a>
+                            <a class="dropdown-item" href="/SempicJPA-1.1/faces/user/view-group.xhtml">View of groups</a>                  
+                          </div>
+                  </li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User
+                      </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="../create-user.xhtml">Create a user</a>
+                          <a class="dropdown-item" href="/SempicJPA-1.1/faces/user/edit-user.xhtml">edit users</a>  
+                          <a class="dropdown-item" href="/SempicJPA-1.1/faces/user/user-view.xhtml">user view</a>     
+                          <a class="dropdown-item" href="/SempicJPA-1.1/faces/admin/list-users.xhtml">list users </a>              
+                        </div>
+                  </li>
 
-         <h:form>
-
-      
-                <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
-        </h:form>
+    </div> 
+  </nav>      
 </ui:composition>

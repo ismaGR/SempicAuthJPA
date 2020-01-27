@@ -48,13 +48,13 @@
 }
             </style>
 
-<ui:insert name="menu" >
-    <ui:include src="menu.xhtml"/>
-</ui:insert> 
+
     </h:head>   
     <h:body>
 
-     
+        <ui:insert name="menu" >
+            <ui:include src="menu.xhtml"/>
+        </ui:insert> 
         
   <h:dataTable class="table" id="albums" value="#{sessionTools.userAlbums}" var="album">
 
@@ -69,7 +69,7 @@
                 <f:facet name="header">
                     <h:outputText value="Email" />
                 </f:facet>
-
+            </h:column>
                 <h:outputText value="#{album.owner.email}"/>
                 
                     <h:dataTable class="table" id="photos" value="#{album.photos}" var="photo" rendered="#{not empty album.photos}">
@@ -85,10 +85,10 @@
                                     <input type="hidden" name="delPhoto" value="#{photo.photoId}" />         
                                     <h:commandButton value="supprimer" action="#{createAlbum.deletePhoto()}"/>
                                 </h:form>                                    
-                              </div>
+                            </div>
                         </h:column>
                     </h:dataTable>            
-            </h:column>
+            
             <h:column>
                 <h:button value="Add photo" outcome="create-photo">
                     <f:param name="albumId" value="#{album.albumId}"/>
@@ -135,8 +135,8 @@
             </script>
 
     </h:body>
-    
+    <h:form>
         <h:commandLink action="#{sessionTools.logout()}">logout</h:commandLink>
-
+    </h:form>
 </html>
 
